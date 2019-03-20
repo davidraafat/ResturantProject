@@ -99,22 +99,31 @@
     <ClInclude Include="Events\Event.h">
       <Filter>Events</Filter>
     </ClInclude>
-    <ClInclude Include="Generic_DS\Node.h">
-      <Filter>Generic_DS</Filter>
-    </ClInclude>
-    <ClInclude Include="Generic_DS\Queue.h">
-      <Filter>Generic_DS</Filter>
-    </ClInclude>
     <ClInclude Include="Events\ArrivalEvent.h">
       <Filter>Events</Filter>
     </ClInclude>
-    <ClInclude Include="List.h">
+    <ClInclude Include="NormalOrders.h">
+      <Filter>Restaurant</Filter>
+    </ClInclude>
+    <ClInclude Include="Rest\VIPorders.h">
+      <Filter>Restaurant</Filter>
+    </ClInclude>
+    <ClInclude Include="Rest\Region.h">
+      <Filter>Restaurant</Filter>
+    </ClInclude>
+    <ClInclude Include="Generic_DS\List.h">
       <Filter>Generic_DS</Filter>
     </ClInclude>
-    <ClInclude Include="ProQueue.h">
+    <ClInclude Include="Generic_DS\Node.h">
       <Filter>Generic_DS</Filter>
     </ClInclude>
-    <ClInclude Include="PriorityNode.h">
+    <ClInclude Include="Generic_DS\PriorityNode.h">
+      <Filter>Generic_DS</Filter>
+    </ClInclude>
+    <ClInclude Include="Generic_DS\ProQueue.h">
+      <Filter>Generic_DS</Filter>
+    </ClInclude>
+    <ClInclude Include="Generic_DS\Queue.h">
       <Filter>Generic_DS</Filter>
     </ClInclude>
   </ItemGroup>
@@ -242,6 +251,12 @@
     </ClCompile>
     <ClCompile Include="Events\ArrivalEvent.cpp">
       <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Rest\VIPorders.cpp">
+      <Filter>Restaurant</Filter>
+    </ClCompile>
+    <ClCompile Include="Rest\Region.cpp">
+      <Filter>Restaurant</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
