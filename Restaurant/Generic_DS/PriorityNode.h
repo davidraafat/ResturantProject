@@ -3,21 +3,19 @@
 template <typename T>
 class PriorityNode:public Node<T>
 {
-
-	int priority;
-
+private:
+	float priority;
 public:
-	PriorityNode(void);
-	void setpriority(int pro);
-	int getpriority();
-	~PriorityNode(void);
+	PriorityNode();
+	void setpriority(float pro);
+    float getpriority();
+	PriorityNode<T>* getNext() const;
+	~PriorityNode();
 };
-
-
 
 ///////////////
 template <typename T>
-void PriorityNode<T>::setpriority(int pro)
+void PriorityNode<T>::setpriority(float pro)
 {
 if(pro>0)
 	priority=pro;
@@ -27,7 +25,17 @@ else
 
 ///////////////
 template <typename T>
-int PriorityNode<T>::getpriority()
+float PriorityNode<T>::getpriority()
 {
 	return priority;
 }
+template <typename T>
+PriorityNode<T>* PriorityNode<T>:: getNext() const 
+{
+	PriorityNode<T>* next=getNext();
+	return next;
+}
+template <typename T>
+PriorityNode<T>::PriorityNode<T>(){}
+template <typename T>
+PriorityNode<T>::~PriorityNode<T>(){}

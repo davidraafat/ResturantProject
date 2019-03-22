@@ -104,12 +104,10 @@
     <ClInclude Include="Generic_DS\ProQueue.h" />
     <ClInclude Include="Generic_DS\Queue.h" />
     <ClInclude Include="GUI\GUI.h" />
-    <ClInclude Include="NormalOrders.h" />
     <ClInclude Include="Rest\Motorcycle.h" />
     <ClInclude Include="Rest\Order.h" />
     <ClInclude Include="Rest\Region.h" />
     <ClInclude Include="Rest\Restaurant.h" />
-    <ClInclude Include="Rest\VIPorders.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CMUgraphicsLib\CMUgraphics.cpp" />
@@ -155,7 +153,6 @@
     <ClCompile Include="Rest\Order.cpp" />
     <ClCompile Include="Rest\Region.cpp" />
     <ClCompile Include="Rest\Restaurant.cpp" />
-    <ClCompile Include="Rest\VIPorders.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMUgraphicsLib\Manual.txt" />

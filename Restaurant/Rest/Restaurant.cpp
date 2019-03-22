@@ -57,6 +57,86 @@ void Restaurant::ExecuteEvents(int CurrentTimeStep)
 }
 
 
+///////////////////////////
+Order* Restaurant::FindOrder(int ID)
+{
+	Order*tm;
+	return tm;
+}
+
+//////////////////////////
+//void Restaurant::cancellNormal(int ID)
+//{
+//	Order* deletedOrder=FindOrder(ID);
+//
+//	REGION temp=deletedOrder->GetRegion();
+//	switch(temp)
+//	{
+//	
+//		case A_REG:
+//		regionA(A_REG).cancelOrder(deletedOrder);
+//		MainOrders.remove(*deletedOrder);
+//	    break;
+//	
+//		case B_REG:
+//		regionA(B_REG).cancelOrder(deletedOrder);
+//		MainOrders.remove(*deletedOrder);
+//	    break;
+//
+//		case C_REG:
+//		regionA(C_REG).cancelOrder(deletedOrder);
+//		MainOrders.remove(*deletedOrder);
+//	    break;
+//
+//		case D_REG:
+//		regionA(D_REG).cancelOrder(deletedOrder);
+//		MainOrders.remove(*deletedOrder);
+//	    break;
+//	
+//	
+//	}
+//
+//}
+//////////////////////////
+//void Restaurant::PromoteOrder(int ID,double extraMoney)
+//{
+//	Order * promoted=FindOrder(ID);
+//	REGION temp=promoted->GetRegion();
+//	switch(temp)
+//	{
+//	//Need to add converter from Normal to VIP
+//		case A_REG:
+//
+//		regionA(A_REG).cancelOrder(promoted);
+//		promoted->setExtraMoney(extraMoney);
+//	    break;
+//	
+//		case B_REG:
+//		regionA(B_REG).cancelOrder(promoted);
+//		promoted->setExtraMoney(extraMoney);
+//
+//	    break;
+//
+//		case C_REG:
+//		regionA(C_REG).cancelOrder(promoted);
+//		promoted->setExtraMoney(extraMoney);
+//
+//	    break;
+//
+//		case D_REG:
+//		regionA(D_REG).cancelOrder(promoted);
+//		promoted->setExtraMoney(extraMoney);
+//
+//	    break;
+//	
+//	
+//	}
+//
+//
+//
+//
+//}
+//////////////////////////
 Restaurant::~Restaurant()
 {
 		delete pGUI;

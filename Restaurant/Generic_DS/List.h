@@ -15,6 +15,7 @@ public:
 	bool isEmpty();    
 	bool insert(Node<T>*newEntry);
 	bool remove(T xItem);
+	bool removehead(T &temp);
 	void clear();
 	~List(void);
 };
@@ -85,7 +86,7 @@ bool List<T>::insert(Node<T>*newEntry)
 {
 	if(head==NULL)
 	{
-	Node<T>*nNode=new Node;
+	Node<T>*nNode=new Node<T>;
 	if(nNode==NULL)
 		return false;
 	else
@@ -100,7 +101,7 @@ bool List<T>::insert(Node<T>*newEntry)
 	}
 	else 
 	{
-	Node<T>*nNode=new Node;
+	Node<T>*nNode=new Node<T>;
 	if(nNode==NULL)
 		return false;
 	else
@@ -121,13 +122,13 @@ bool List<T>::remove(T xItem)
 
 	while(next)
 	{
-    if(next==head && next->getItem()==xItem)
+    if(next==head && (next->getItem())==xItem)
 	{
 		head=head->getNext();
 		delete next;
 		return true;
 	}
-	else if(next->getItem()==xItem)
+	else if((next->getItem())==xItem)
 	{
 	prev->setNext(next->getNext());
 	delete next;
@@ -161,6 +162,21 @@ void List<T>::clear()
 		head = P;
 
 	}
+
+}
+
+///////////////////////////
+template <typename T>
+bool List<T>::removehead(T &temp)
+{
+	if (head==NULL) return false;
+	
+	Node<T>*next=head;
+	temp=next->getItem();
+		head=head->getNext();
+		delete next;
+		return true;
+	
 
 }
 

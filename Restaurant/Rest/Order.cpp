@@ -5,6 +5,17 @@ Order::Order(int id, ORD_TYPE r_Type, REGION r_region)
 	ID = (id>0&&id<1000)?id:0;	//1<ID<999
 	type = r_Type;
 	Region = r_region;	
+	priority=0.5*totalMoney+Distance+200/float(ArrTime);
+
+}
+
+Order::Order()
+{
+}
+
+float Order::getPriority()
+{
+	return priority;
 }
 
 Order::~Order()
@@ -14,6 +25,11 @@ Order::~Order()
 int Order::GetID()
 {
 	return ID;
+}
+
+void Order::setExtraMoney(double extra)
+{
+	totalMoney+=extra;
 }
 
 
@@ -35,4 +51,24 @@ void Order::SetDistance(int d)
 int Order::GetDistance() const
 {
 	return Distance;
+}
+
+double Order::getMoney()
+{
+	return totalMoney;
+}
+
+int Order::getArrTime()
+{
+	return ArrTime;
+}
+
+int Order::getServTime()
+{
+	return ServTime;
+}
+
+int Order::getFinishTime()
+{
+	return FinishTime;
 }

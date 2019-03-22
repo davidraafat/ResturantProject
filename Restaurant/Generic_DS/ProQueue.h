@@ -11,7 +11,7 @@ private :
 public :
 	ProQueue();	
 	bool isEmpty() const ;
-	bool enqueue(const T& newEntry);
+	bool enqueue(const T& newEntry,float p);
 	bool dequeue(T& frntEntry);  
 	bool peekFront(T& frntEntry)  const;	
 	~ProQueue();
@@ -40,11 +40,29 @@ bool ProQueue<T>::isEmpty() const
 }
 //////////////////////////
 template <typename T>
-bool ProQueue<T>::enqueue(const T& newEntry)
-{
+bool ProQueue<T>::enqueue(const T& newEntry,float p)
+{   
+	PriorityNode<T>*newnode=new PriorityNode<T>;
+	newnode->setItem(newEntry);
+	newnode->setpriority(p);
+	if(newnode==NULL) return false;
+	else if(frontPtr)
+	{
+		PriorityNode<T> *ptr=frontPtr;
+		while (ptr->getNext()&&!(ptr->getpriority()<=newnode->getpriority()))	
+		{ptr =(ptr->getNext());}
+	
+		newnode->setNext(ptr->getNext());
+		ptr->setNext(newnode);
+		return true;
+	}
 
-
-
+	else
+	{
+		frontPtr=newnode;
+		backPtr=newnode;
+		backPtr->setNext(NULL);
+	}
 }
 //////////////////////////
 template <typename T>

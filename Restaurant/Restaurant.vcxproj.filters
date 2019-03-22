@@ -102,12 +102,6 @@
     <ClInclude Include="Events\ArrivalEvent.h">
       <Filter>Events</Filter>
     </ClInclude>
-    <ClInclude Include="NormalOrders.h">
-      <Filter>Restaurant</Filter>
-    </ClInclude>
-    <ClInclude Include="Rest\VIPorders.h">
-      <Filter>Restaurant</Filter>
-    </ClInclude>
     <ClInclude Include="Rest\Region.h">
       <Filter>Restaurant</Filter>
     </ClInclude>
@@ -251,9 +245,6 @@
     </ClCompile>
     <ClCompile Include="Events\ArrivalEvent.cpp">
       <Filter>Events</Filter>
-    </ClCompile>
-    <ClCompile Include="Rest\VIPorders.cpp">
-      <Filter>Restaurant</Filter>
     </ClCompile>
     <ClCompile Include="Rest\Region.cpp">
       <Filter>Restaurant</Filter>
