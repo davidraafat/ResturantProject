@@ -23,6 +23,7 @@ public :
 template < typename T>
 Node<T>::Node() 
 {
+	item =*new T;
 	next = nullptr;
 } 
 

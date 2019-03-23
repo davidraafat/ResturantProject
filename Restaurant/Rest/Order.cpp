@@ -9,9 +9,8 @@ Order::Order(int id, ORD_TYPE r_Type, REGION r_region)
 
 }
 
-Order::Order()
-{
-}
+//Order::Order()
+//{}
 
 float Order::getPriority()
 {
@@ -72,3 +71,10 @@ int Order::getFinishTime()
 {
 	return FinishTime;
 }
+bool Order::operator==(Order o)
+{
+	if(o.GetID()==ID){return true;}	
+	else{return false;}	
+
+}
+

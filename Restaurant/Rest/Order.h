@@ -22,15 +22,14 @@ protected:
 	//
 
 public:
-	Order () ;
+	//Order () ;
 	Order(int ID, ORD_TYPE r_Type, REGION r_region);
 	virtual ~Order();
-
+	bool operator==(Order o);
 	int GetID();
 
 	int GetType() const;
 	REGION GetRegion() const;
-
 	void SetDistance(int d);
 	int GetDistance() const;
 

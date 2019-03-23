@@ -7,15 +7,21 @@ class List
 {
 	Node<T>* head;    //Pointer to the first element in the list
 	Node<T>* tail;    //Pointer to the last element in the list
-	//Node<T>* getpointerto(T item);  //utility function to get pointer to specific data
+	Node<T>* getpointerto(T item);  //utility function to get pointer to specific data
 
 public:
+	
+
+
 	List(void);
 //	List(const List<T> & list );
 	bool isEmpty();    
-	bool insert(Node<T>*newEntry);
+	bool insert(T newEntry);
 	bool remove(T xItem);
 	bool removehead(T &temp);
+	T getentry(int pos);
+	Node<T>* getNodeAt(int pos);
+	Node<T>* getHead();
 	void clear();
 	~List(void);
 };
@@ -26,6 +32,31 @@ List<T>::List()
 {
 head=NULL;
 tail=NULL;
+}
+template<class T>
+Node<T>* List<T>::getNodeAt(int pos)
+{
+	Node<T>* nptr=head;
+	if((pos>=1))
+	{
+	for(int i=1;i<pos;i++)
+	{
+		nptr=nptr->getNext();
+	}
+	return nptr;
+	}
+	else{return NULL;}
+}
+
+template <typename T>
+T List<T>::getentry(int pos)
+{
+	if((pos>=1))
+	{
+		Node<T>* nptr=getNodeAt(pos);
+		return nptr->getItem();
+	}
+	else{cout<<"entry not found";}
 }
 ///////////////////////////
 //template<typename T>
@@ -82,17 +113,17 @@ return false;
 //}
 ///////////////////////////
 template <typename T>
-bool List<T>::insert(Node<T>*newEntry)
+bool List<T>::insert(T newEntry)
 {
 	if(head==NULL)
 	{
-	Node<T>*nNode=new Node<T>;
+	Node<T>*nNode=new Node<T>();
 	if(nNode==NULL)
 		return false;
 	else
 	{ 
 	nNode->setNext(NULL);
-	nNode->setItem(newEntry->getItem());
+	nNode->setItem(newEntry);
 	head=nNode;
 	tail=nNode;
 	return true;
@@ -112,17 +143,18 @@ bool List<T>::insert(Node<T>*newEntry)
 	return true;
 	}
 	
-	}}
+	}
+}
 ///////////////////////////
 template <typename T>
 bool List<T>::remove(T xItem)
 {
+
 	Node<T>*prev=NULL;
 	Node<T>*next=head;
-
 	while(next)
 	{
-    if(next==head && (next->getItem())==xItem)
+    if((next==head )&& ((next->getItem())==xItem))
 	{
 		head=head->getNext();
 		delete next;
@@ -146,8 +178,6 @@ bool List<T>::remove(T xItem)
 		prev=prev->getNext();
 		}
 	}
-
-
 	return false;
 }
 ///////////////////////////
@@ -186,3 +216,7 @@ List<T>::~List()
 {
 clear();
 }
+template <typename T>
+
+	Node<T>* List<T>::getHead()
+	{return head;}

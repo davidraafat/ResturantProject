@@ -16,6 +16,7 @@ class ArrivalEvent: public Event
 public:
 	ArrivalEvent(int eTime, int oID, ORD_TYPE oType, REGION reg);
 	//Add more constructors if needed
+	ArrivalEvent(int eTime, ORD_TYPE oType,int oID,int oDist,int oMony, REGION reg);
 	
 	virtual void Execute(Restaurant *pRest);	//override execute function
 

@@ -1,9 +1,10 @@
 #pragma once
 #include "Order.h"
 #include "Motorcycle.h"
-#include "\Users\Alvera\Desktop\New folder\Project_Code_S2019\Restaurant\Generic_DS\List.h"
-#include "\Users\Alvera\Desktop\New folder\Project_Code_S2019\Restaurant\Generic_DS\Queue.h"
-#include "\Users\Alvera\Desktop\New folder\Project_Code_S2019\Restaurant\Generic_DS\ProQueue.h"
+#include "../Generic_DS/PriorityNode.h"
+#include "../Generic_DS/ProQueue.h"
+#include "../Generic_DS/Queue.h"
+#include"../Generic_DS/List.h"
 
 class Region
 {
@@ -13,6 +14,8 @@ class Region
 	Queue<Motorcycle> frozenMotors;                          //the list of frozen motorcycles
 	Queue<Motorcycle> fastMotors;                            //the list of fast motorcycles
 	Queue<Motorcycle> normalMotors;                          //the list of normal motorcycles
+	int speedOfFastMoto,speedOfNormMoto,speedOfFrozenMoto;         //the number of the Fast,Normal&Frozen motorcycles
+	
 	int numOfFastMoto,numOfNormMoto,numOfFrozenMoto;         //the number of the Fast,Normal&Frozen motorcycles
 	int numOfVipOrder,numOfNormOrders,numOfFrozenOrders;     //the number of the VIP,Normal&Frozen Orders
 	Queue<Order*> deliveriedOrder;                           //the list of deliveried orders
@@ -37,7 +40,7 @@ public:
 	int getNNOrders();                                       //Get the # of Normal Orders
 	int getNFOrders();                                       //Get the # of Frozen Orders
 	int getNVipOrder();                                         //Get the # of VIP Orders
-
+void setmotorsinfo(int sn,int sf,int sv,int nn,int nf,int nv);
 
 
 

@@ -21,9 +21,9 @@ Region::~Region()
 void Region::addNormalOrder(Order* newOrder){
 	if(newOrder->GetType()==TYPE_NRM && newOrder->GetRegion()==GetRegion())
 	{
-		Node<Order*>* newOrd= new Node<Order*>;
+		Node<Order*>* newOrd= new Node<Order*>();
 		newOrd->setItem(newOrder);
-		normalOrders.insert(newOrd);
+		normalOrders.insert(newOrd->getItem());
 		numOfNormOrders++;
 	}
 }
@@ -50,7 +50,8 @@ void Region::addVipOrder(Order *newVipOrder){
 }
 ////////////////////////////////////////
 //5-Cancel a Normal Order on the list
-bool Region::cancelOrder(Order* canOrder){
+bool Region::cancelOrder(Order* canOrder)
+{
 	bool check=normalOrders.remove(canOrder);
 	numOfNormOrders--;
 	return check;
@@ -103,4 +104,17 @@ int Region::getNFOrders(){return numOfFrozenOrders;}
 ///////////////////////////////////////////
 //14-get num of Vip orders
 int Region::getNVipOrder(){return numOfVipOrder;}
-
+//////////////////////////////////////////
+//15-set
+void Region::setmotorsinfo(int sn,int sf,int sv,int nn,int nf,int nv)
+{
+	numOfFastMoto=nv;
+	numOfFrozenMoto=nf;
+	numOfNormMoto=nn;
+	normalMotors=Queue<Motorcycle>();
+	normalMotors.enqueue(Motorcycle(sn));
+	frozenMotors=Queue<Motorcycle>();
+	frozenMotors.enqueue(Motorcycle(sf));
+	fastMotors=Queue<Motorcycle>();
+	fastMotors.enqueue(Motorcycle(sv));
+}

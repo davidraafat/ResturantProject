@@ -16,6 +16,7 @@ class Motorcycle
 
 public:
 	Motorcycle();
+	Motorcycle(int sp);
 	virtual ~Motorcycle();
 };
 

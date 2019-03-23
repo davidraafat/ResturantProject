@@ -2,18 +2,24 @@
 #include <time.h>
 #include <iostream>
 using namespace std;
-
 #include "Restaurant.h"
 #include "..\Events\ArrivalEvent.h"
 
 
 Restaurant::Restaurant() 
 {
-	pGUI = NULL;
+	regionA  =new Region(A_REG);
+	regionB  =new Region(B_REG);
+	regionC  =new Region(C_REG);
+	regionD  =new Region(D_REG);
+
+		pGUI=new GUI;
 }
 
 void Restaurant::RunSimulation()
 {
+	if(pGUI ==NULL)
+
 	pGUI = new GUI;
 	PROG_MODE	mode = pGUI->getGUIMode();
 		
@@ -60,82 +66,89 @@ void Restaurant::ExecuteEvents(int CurrentTimeStep)
 ///////////////////////////
 Order* Restaurant::FindOrder(int ID)
 {
-	Order*tm;
+	
+	Order*tm=NULL;
+	Node<Order*>* j=MainOrders.getHead();
+	while(j)
+	{
+		if(j->getItem()->GetID()==ID)
+	{
+	tm= j->getItem();
+	break;
+	}
+	else j=(j->getNext());
+	}
+		
 	return tm;
 }
 
+////////////////////////
+void Restaurant::cancellNormal(int ID)
+{
+	Order* deletedOrder=FindOrder(ID);
+	REGION temp=deletedOrder->GetRegion();
+	switch(temp)
+	{
+	
+		case A_REG:
+		regionA->cancelOrder(deletedOrder);
+		MainOrders.remove(deletedOrder);
+	    break;
+	
+		case B_REG:
+		regionB->cancelOrder(deletedOrder);
+		MainOrders.remove(deletedOrder);
+	    break;
+
+		case C_REG:
+		regionC->cancelOrder(deletedOrder);
+		MainOrders.remove(deletedOrder);
+	    break;
+
+		case D_REG:
+		regionD->cancelOrder(deletedOrder);
+		MainOrders.remove(deletedOrder);
+	    break;
+	
+	
+	}
+
+}
 //////////////////////////
-//void Restaurant::cancellNormal(int ID)
-//{
-//	Order* deletedOrder=FindOrder(ID);
-//
-//	REGION temp=deletedOrder->GetRegion();
-//	switch(temp)
-//	{
-//	
-//		case A_REG:
-//		regionA(A_REG).cancelOrder(deletedOrder);
-//		MainOrders.remove(*deletedOrder);
-//	    break;
-//	
-//		case B_REG:
-//		regionA(B_REG).cancelOrder(deletedOrder);
-//		MainOrders.remove(*deletedOrder);
-//	    break;
-//
-//		case C_REG:
-//		regionA(C_REG).cancelOrder(deletedOrder);
-//		MainOrders.remove(*deletedOrder);
-//	    break;
-//
-//		case D_REG:
-//		regionA(D_REG).cancelOrder(deletedOrder);
-//		MainOrders.remove(*deletedOrder);
-//	    break;
-//	
-//	
-//	}
-//
-//}
-//////////////////////////
-//void Restaurant::PromoteOrder(int ID,double extraMoney)
-//{
-//	Order * promoted=FindOrder(ID);
-//	REGION temp=promoted->GetRegion();
-//	switch(temp)
-//	{
-//	//Need to add converter from Normal to VIP
-//		case A_REG:
-//
-//		regionA(A_REG).cancelOrder(promoted);
-//		promoted->setExtraMoney(extraMoney);
-//	    break;
-//	
-//		case B_REG:
-//		regionA(B_REG).cancelOrder(promoted);
-//		promoted->setExtraMoney(extraMoney);
-//
-//	    break;
-//
-//		case C_REG:
-//		regionA(C_REG).cancelOrder(promoted);
-//		promoted->setExtraMoney(extraMoney);
-//
-//	    break;
-//
-//		case D_REG:
-//		regionA(D_REG).cancelOrder(promoted);
-//		promoted->setExtraMoney(extraMoney);
-//
-//	    break;
-//	
-//	
-//	}
-//
-//
-//
-//
-//}
+void Restaurant::PromoteOrder(int ID,double extraMoney)
+{
+	Order * promoted=FindOrder(ID);
+	REGION temp=promoted->GetRegion();
+	switch(temp)
+	{
+	//Need to add converter from Normal to VIP
+		case A_REG:
+
+		regionA->cancelOrder(promoted);
+		promoted->setExtraMoney(extraMoney);
+	    break;
+	
+		case B_REG:
+		regionB->cancelOrder(promoted);
+		promoted->setExtraMoney(extraMoney);
+
+	    break;
+
+		case C_REG:
+		regionC->cancelOrder(promoted);
+		promoted->setExtraMoney(extraMoney);
+
+	    break;
+
+		case D_REG:
+		regionD->cancelOrder(promoted);
+		promoted->setExtraMoney(extraMoney);
+
+	    break;
+	
+	
+	}
+}
 //////////////////////////
 Restaurant::~Restaurant()
 {
@@ -193,8 +206,8 @@ void Restaurant::Just_A_Demo()
 
 		//Randomize event time
 		EvTime += rand()%4;
-		pEv = new ArrivalEvent(EvTime,O_id,(ORD_TYPE)OType,(REGION)reg);
-		AddEvent(pEv);
+		//pEv = new ArrivalEvent(EvTime,O_id,(ORD_TYPE)OType,(REGION)reg);
+		//AddEvent(pEv);
 
 	}	
 
@@ -233,6 +246,8 @@ void Restaurant::Just_A_Demo()
 void Restaurant::AddtoDemoQueue(Order *pOrd)
 {
 	DEMO_Queue.enqueue(pOrd);
+	MainOrders.insert(pOrd);
+	
 }
 
 Order* Restaurant::getDemoOrder()
@@ -242,6 +257,26 @@ Order* Restaurant::getDemoOrder()
 	return pOrd;
 
 }
+GUI* Restaurant::getpGUI(){return pGUI;}
+Region* Restaurant::getRegion(REGION R)
+{
+	switch (R)
+	{
+	case A_REG:return this->regionA;
+	case B_REG:return this->regionB;
+	case C_REG:return this->regionC;
+	case D_REG:return this->regionD;
+	
+	}	
+	
+	}
 
+	void Restaurant::setTimeOrdPr(int n )
+	{
+	TimeOrdProm=(n>0)?n:0;
+	}
+
+	int Restaurant::getTimeOrdPr()
+	{return TimeOrdProm;}
 
 /// ==> end of DEMO-related function

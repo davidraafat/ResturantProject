@@ -7,10 +7,18 @@ ArrivalEvent::ArrivalEvent(int eTime, int oID, ORD_TYPE oType, REGION reg):Event
 	OrdType = oType;
 	OrdRegion = reg;
 }
+ArrivalEvent::ArrivalEvent(int eTime, ORD_TYPE oType,int oID,int oDist,int oMony, REGION reg):Event(eTime, oID)
+{
+	OrdType = oType;
+	OrdRegion = reg;
+	OrdDistance=oDist;
+	OrdMoney=oMony;
+
+}
 
 void ArrivalEvent::Execute(Restaurant* pRest)
 {
-	//This function should create and order and and fills its data 
+	//This function should create an order and and fills its data 
 	// Then adds it to normal, frozen, or VIP order lists that you will create in phase1
 
 	

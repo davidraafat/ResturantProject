@@ -1,20 +1,18 @@
-﻿Build started 3/21/2019 10:27:44 PM.
-     1>Project "C:\Users\Alvera\Desktop\New folder\Project_Code_S2019\Restaurant\Restaurant.vcxproj" on node 2 (Build target(s)).
+﻿Build started 23/03/2019 12:10:37 ص.
+     1>Project "C:\Users\new\Downloads\Pro(1)\Project_Code_S2019\Restaurant\Restaurant.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Demo_Main.cpp Events\ArrivalEvent.cpp Rest\Restaurant.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Rest\Restaurant.cpp
          Restaurant.cpp
-     1>c:\users\alvera\desktop\new folder\project_code_s2019\restaurant\generic_ds\prioritynode.h(39): warning C4812: obsolete declaration style: please use 'PriorityNode<T>::PriorityNode' instead
-     1>c:\users\alvera\desktop\new folder\project_code_s2019\restaurant\generic_ds\prioritynode.h(41): warning C4812: obsolete declaration style: please use 'PriorityNode<T>::~PriorityNode' instead
-     1>c:\users\alvera\desktop\new folder\project_code_s2019\restaurant\rest\restaurant.cpp(164): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
-     1>c:\users\alvera\desktop\new folder\project_code_s2019\restaurant\rest\restaurant.cpp(207): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
+     1>c:\users\new\downloads\pro(1)\project_code_s2019\restaurant\generic_ds\prioritynode.h(39): warning C4812: obsolete declaration style: please use 'PriorityNode<T>::PriorityNode' instead
+     1>c:\users\new\downloads\pro(1)\project_code_s2019\restaurant\generic_ds\prioritynode.h(41): warning C4812: obsolete declaration style: please use 'PriorityNode<T>::~PriorityNode' instead
+     1>c:\users\new\downloads\pro(1)\project_code_s2019\restaurant\rest\restaurant.cpp(176): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>c:\users\new\downloads\pro(1)\project_code_s2019\restaurant\rest\restaurant.cpp(219): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdlib.h(909) : see declaration of 'itoa'
-         Generating Code...
-     1>c:\users\alvera\desktop\new folder\project_code_s2019\restaurant\rest\restaurant.cpp(64): warning C4700: uninitialized local variable 'tm' used
-         Skipping... (no relevant changes detected)
-         ArrivalEvent.cpp
-         Demo_Main.cpp
+     1>c:\users\new\downloads\pro(1)\project_code_s2019\restaurant\rest\restaurant.cpp(175): warning C4101: 'pEv' : unreferenced local variable
+     1>c:\users\new\downloads\pro(1)\project_code_s2019\restaurant\rest\restaurant.cpp(271): warning C4715: 'Restaurant::getRegion' : not all control paths return a value
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Alvera\Desktop\New folder\Project_Code_S2019\Debug\Restaurant.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Alvera\Desktop\New folder\Project_Code_S2019\Debug\Restaurant.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Alvera\Desktop\New folder\Project_Code_S2019\Debug\Restaurant.lib" /MACHINE:X86 Debug\CMUgraphics.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\new\Downloads\Pro(1)\Project_Code_S2019\Debug\Restaurant.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\new\Downloads\Pro(1)\Project_Code_S2019\Debug\Restaurant.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\new\Downloads\Pro(1)\Project_Code_S2019\Debug\Restaurant.lib" /MACHINE:X86 Debug\CancellationEvent.obj
+         Debug\CMUgraphics.obj
          Debug\colors.obj
          Debug\image.obj
          Debug\jpegload.obj
@@ -53,13 +51,14 @@
          Debug\Event.obj
          Debug\ArrivalEvent.obj
          Debug\GUI.obj
+         Debug\PromotionEvent.obj
          Debug\Motorcycle.obj
          Debug\Order.obj
          Debug\Region.obj
          Debug\Restaurant.obj
-         Restaurant.vcxproj -> C:\Users\Alvera\Desktop\New folder\Project_Code_S2019\Debug\Restaurant.exe
-     1>Done Building Project "C:\Users\Alvera\Desktop\New folder\Project_Code_S2019\Restaurant\Restaurant.vcxproj" (Build target(s)).
+         Restaurant.vcxproj -> C:\Users\new\Downloads\Pro(1)\Project_Code_S2019\Debug\Restaurant.exe
+     1>Done Building Project "C:\Users\new\Downloads\Pro(1)\Project_Code_S2019\Restaurant\Restaurant.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:04.00
+Time Elapsed 00:00:06.42

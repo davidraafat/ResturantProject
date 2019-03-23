@@ -45,7 +45,7 @@ bool ProQueue<T>::enqueue(const T& newEntry,float p)
 	PriorityNode<T>*newnode=new PriorityNode<T>;
 	newnode->setItem(newEntry);
 	newnode->setpriority(p);
-	if(newnode==NULL) return false;
+	if(newnode==nullptr) return false;
 	else if(frontPtr)
 	{
 		PriorityNode<T> *ptr=frontPtr;
@@ -61,7 +61,7 @@ bool ProQueue<T>::enqueue(const T& newEntry,float p)
 	{
 		frontPtr=newnode;
 		backPtr=newnode;
-		backPtr->setNext(NULL);
+		backPtr->setNext(nullptr);
 	}
 }
 //////////////////////////
