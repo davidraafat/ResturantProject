@@ -43,25 +43,47 @@ template <typename T>
 bool ProQueue<T>::enqueue(const T& newEntry,float p)
 {   
 	PriorityNode<T>*newnode=new PriorityNode<T>;
-	newnode->setItem(newEntry);
-	newnode->setpriority(p);
-	if(newnode==nullptr) return false;
-	else if(frontPtr)
-	{
-		PriorityNode<T> *ptr=frontPtr;
-		while (ptr->getNext()&&!(ptr->getpriority()<=newnode->getpriority()))	
-		{ptr =(ptr->getNext());}
+	if(newnode==NULL) return false;
 	
+	else if(frontPtr)
+	{    newnode->setItem(newEntry);
+	     newnode->setpriority(p);
+		PriorityNode<T> *ptr=frontPtr;
+		while (ptr->getNext()&&(ptr->getpriority()>=newnode->getpriority()))	
+		{
+			ptr =ptr->getNext();
+		}
+	  if (ptr==frontPtr)
+		  { 
+			  if (ptr->getpriority()>=newnode->getpriority())
+				  {
+					newnode->setNext(ptr->getNext());
+					ptr->setNext(newnode);
+					return true;
+				  }
+			  else
+				  {
+					  newnode->setNext(ptr);
+					  frontPtr=newnode;
+					  return true;
+				  }
+		  }
+	  else
+	  {   
 		newnode->setNext(ptr->getNext());
 		ptr->setNext(newnode);
 		return true;
+	  }
 	}
 
 	else
 	{
+		newnode->setItem(newEntry);
+      	newnode->setpriority(p);
 		frontPtr=newnode;
 		backPtr=newnode;
-		backPtr->setNext(nullptr);
+		backPtr->setNext(NULL);
+		return true;
 	}
 }
 //////////////////////////
@@ -90,7 +112,7 @@ template <typename T>
 bool ProQueue<T>:: peekFront(T& frntEntry) const 
 {
 	if(isEmpty())
-		return false;
+	return false;
 
 	frntEntry = frontPtr->getItem();
 	return true;

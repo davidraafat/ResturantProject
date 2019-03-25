@@ -16,8 +16,14 @@ class Motorcycle
 
 public:
 	Motorcycle();
-	Motorcycle(int sp);
+	Motorcycle(int id,ORD_TYPE Type,int Speed,REGION r,STATUS currentStatus);
+	int getID();
+	ORD_TYPE getType();
+	int getSpeed();
+	REGION getRegion();
+	STATUS getStatus();
 	virtual ~Motorcycle();
+
 };
 
 #endif
