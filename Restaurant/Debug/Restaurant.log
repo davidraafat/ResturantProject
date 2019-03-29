@@ -1,3 +1,22 @@
+<<<<<<< HEAD
+﻿Build started 3/29/2019 12:51:59 PM.
+     1>Project "C:\Users\Alvera\Downloads\Project_27_3\Restaurant\Restaurant.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt CMUgraphicsLib\CMUgraphics.cpp CMUgraphicsLib\colors.cpp CMUgraphicsLib\image.cpp CMUgraphicsLib\keyqueue.cpp CMUgraphicsLib\mousequeue.cpp CMUgraphicsLib\windowinput.cpp Demo_Main.cpp Events\CancellationEvent.cpp Events\Event.cpp Events\ArrivalEvent.cpp Events\PromotionEvent.cpp GUI\GUI.cpp Rest\Motorcycle.cpp Rest\Order.cpp Rest\Region.cpp Rest\Restaurant.cpp
+         Restaurant.cpp
+     1>c:\users\alvera\downloads\project_27_3\restaurant\rest\restaurant.cpp(199): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>c:\users\alvera\downloads\project_27_3\restaurant\rest\restaurant.cpp(242): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdlib.h(909) : see declaration of 'itoa'
+     1>c:\users\alvera\downloads\project_27_3\restaurant\rest\restaurant.cpp(198): warning C4101: 'pEv' : unreferenced local variable
+     1>c:\users\alvera\downloads\project_27_3\restaurant\rest\restaurant.cpp(395): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdlib.h(909) : see declaration of 'itoa'
+     1>c:\users\alvera\downloads\project_27_3\restaurant\rest\restaurant.cpp(384): warning C4101: 'pEv' : unreferenced local variable
+         Region.cpp
+     1>c:\users\alvera\downloads\project_27_3\restaurant\rest\region.cpp(54): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\alvera\downloads\project_27_3\restaurant\rest\region.cpp(149): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\alvera\downloads\project_27_3\restaurant\rest\region.cpp(155): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\alvera\downloads\project_27_3\restaurant\rest\region.cpp(161): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+=======
 ﻿Build started 3/26/2019 1:01:32 AM.
      1>Project "C:\Users\Alvera\Desktop\New folder\Project_Code_S2019\Restaurant\Restaurant.vcxproj" on node 2 (Rebuild target(s)).
      1>ClCompile:
@@ -12,6 +31,7 @@
      1>c:\users\alvera\desktop\new folder\project_code_s2019\restaurant\rest\restaurant.cpp(387): warning C4101: 'pEv' : unreferenced local variable
          Region.cpp
      1>c:\users\alvera\desktop\new folder\project_code_s2019\restaurant\rest\region.cpp(54): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+>>>>>>> f5002feb07fd46685827069b18888cec51bf56e5
          Order.cpp
          Motorcycle.cpp
          GUI.cpp
@@ -24,6 +44,27 @@
          mousequeue.cpp
          keyqueue.cpp
          image.cpp
+<<<<<<< HEAD
+     1>c:\users\alvera\downloads\project_27_3\restaurant\cmugraphicslib\image.cpp(115): warning C4018: '<' : signed/unsigned mismatch
+         colors.cpp
+         CMUgraphics.cpp
+     1>c:\users\alvera\downloads\project_27_3\restaurant\cmugraphicslib\cmugraphics.cpp(751): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\string.h(110) : see declaration of 'strcpy'
+     1>c:\users\alvera\downloads\project_27_3\restaurant\cmugraphicslib\cmugraphics.cpp(1164): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>c:\users\alvera\downloads\project_27_3\restaurant\cmugraphicslib\cmugraphics.cpp(1171): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>c:\users\alvera\downloads\project_27_3\restaurant\cmugraphicslib\cmugraphics.cpp(1202): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>c:\users\alvera\downloads\project_27_3\restaurant\cmugraphicslib\cmugraphics.cpp(1210): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>c:\users\alvera\downloads\project_27_3\restaurant\cmugraphicslib\cmugraphics.cpp(1357): warning C4018: '>' : signed/unsigned mismatch
+         Generating Code...
+     1>c:\users\alvera\downloads\project_27_3\restaurant\demo_main.cpp(25): warning C4715: 'ChangeTypeReg' : not all control paths return a value
+     1>c:\users\alvera\downloads\project_27_3\restaurant\demo_main.cpp(17): warning C4715: 'ChangeTypeOrd' : not all control paths return a value
+     1>c:\users\alvera\downloads\project_27_3\restaurant\rest\restaurant.cpp(496): warning C4715: 'Restaurant::ChangeTypeOrd' : not all control paths return a value
+     1>c:\users\alvera\downloads\project_27_3\restaurant\rest\restaurant.cpp(503): warning C4715: 'Restaurant::ChangeTypeReg' : not all control paths return a value
+=======
      1>c:\users\alvera\desktop\new folder\project_code_s2019\restaurant\cmugraphicslib\image.cpp(115): warning C4018: '<' : signed/unsigned mismatch
          colors.cpp
          CMUgraphics.cpp
@@ -41,24 +82,37 @@
          Generating Code...
      1>c:\users\alvera\desktop\new folder\project_code_s2019\restaurant\rest\restaurant.cpp(419): warning C4715: 'Restaurant::ChangeTypeOrd' : not all control paths return a value
      1>c:\users\alvera\desktop\new folder\project_code_s2019\restaurant\rest\restaurant.cpp(426): warning C4715: 'Restaurant::ChangeTypeReg' : not all control paths return a value
+>>>>>>> f5002feb07fd46685827069b18888cec51bf56e5
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TC /analyze- /errorReport:prompt CMUgraphicsLib\jpegload.c CMUgraphicsLib\jpeg\jcomapi.c CMUgraphicsLib\jpeg\jcparam.c CMUgraphicsLib\jpeg\jdapimin.c CMUgraphicsLib\jpeg\jdapistd.c CMUgraphicsLib\jpeg\jdatasrc.c CMUgraphicsLib\jpeg\jdcoefct.c CMUgraphicsLib\jpeg\jdcolor.c CMUgraphicsLib\jpeg\jddctmgr.c CMUgraphicsLib\jpeg\jdhuff.c CMUgraphicsLib\jpeg\jdinput.c CMUgraphicsLib\jpeg\jdmainct.c CMUgraphicsLib\jpeg\jdmarker.c CMUgraphicsLib\jpeg\jdmaster.c CMUgraphicsLib\jpeg\jdmerge.c CMUgraphicsLib\jpeg\jdphuff.c CMUgraphicsLib\jpeg\jdpostct.c CMUgraphicsLib\jpeg\jdsample.c CMUgraphicsLib\jpeg\jdtrans.c CMUgraphicsLib\jpeg\jerror.c CMUgraphicsLib\jpeg\jidctflt.c CMUgraphicsLib\jpeg\jidctfst.c CMUgraphicsLib\jpeg\jidctint.c CMUgraphicsLib\jpeg\jidctred.c CMUgraphicsLib\jpeg\jmemmgr.c CMUgraphicsLib\jpeg\jmemnobs.c CMUgraphicsLib\jpeg\jquant1.c CMUgraphicsLib\jpeg\jquant2.c CMUgraphicsLib\jpeg\jutils.c
          jutils.c
          jquant2.c
          jquant1.c
          jmemnobs.c
          jmemmgr.c
+<<<<<<< HEAD
+     1>c:\users\alvera\downloads\project_27_3\restaurant\cmugraphicslib\jpeg\jmemmgr.c(1103): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdlib.h(449) : see declaration of 'getenv'
+     1>c:\users\alvera\downloads\project_27_3\restaurant\cmugraphicslib\jpeg\jmemmgr.c(1106): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+=======
      1>c:\users\alvera\desktop\new folder\project_code_s2019\restaurant\cmugraphicslib\jpeg\jmemmgr.c(1103): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdlib.h(449) : see declaration of 'getenv'
      1>c:\users\alvera\desktop\new folder\project_code_s2019\restaurant\cmugraphicslib\jpeg\jmemmgr.c(1106): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+>>>>>>> f5002feb07fd46685827069b18888cec51bf56e5
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(311) : see declaration of 'sscanf'
          jidctred.c
          jidctint.c
          jidctfst.c
          jidctflt.c
          jerror.c
+<<<<<<< HEAD
+     1>c:\users\alvera\downloads\project_27_3\restaurant\cmugraphicslib\jpeg\jerror.c(169): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>c:\users\alvera\downloads\project_27_3\restaurant\cmugraphicslib\jpeg\jerror.c(175): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+=======
      1>c:\users\alvera\desktop\new folder\project_code_s2019\restaurant\cmugraphicslib\jpeg\jerror.c(169): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
      1>c:\users\alvera\desktop\new folder\project_code_s2019\restaurant\cmugraphicslib\jpeg\jerror.c(175): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+>>>>>>> f5002feb07fd46685827069b18888cec51bf56e5
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
          jdtrans.c
          jdsample.c
@@ -81,11 +135,19 @@
          jcparam.c
          jcomapi.c
          jpegload.c
+<<<<<<< HEAD
+     1>c:\users\alvera\downloads\project_27_3\restaurant\cmugraphicslib\jpegload.c(23): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(218) : see declaration of 'fopen'
+         Generating Code...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Alvera\Downloads\Project_27_3\Debug\Restaurant.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Alvera\Downloads\Project_27_3\Debug\Restaurant.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Alvera\Downloads\Project_27_3\Debug\Restaurant.lib" /MACHINE:X86 Debug\CMUgraphics.obj
+=======
      1>c:\users\alvera\desktop\new folder\project_code_s2019\restaurant\cmugraphicslib\jpegload.c(23): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(218) : see declaration of 'fopen'
          Generating Code...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Alvera\Desktop\New folder\Project_Code_S2019\Debug\Restaurant.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Alvera\Desktop\New folder\Project_Code_S2019\Debug\Restaurant.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Alvera\Desktop\New folder\Project_Code_S2019\Debug\Restaurant.lib" /MACHINE:X86 Debug\CMUgraphics.obj
+>>>>>>> f5002feb07fd46685827069b18888cec51bf56e5
          Debug\colors.obj
          Debug\image.obj
          Debug\jpegload.obj
@@ -130,9 +192,18 @@
          Debug\Order.obj
          Debug\Region.obj
          Debug\Restaurant.obj
+<<<<<<< HEAD
+         Restaurant.vcxproj -> C:\Users\Alvera\Downloads\Project_27_3\Debug\Restaurant.exe
+     1>Done Building Project "C:\Users\Alvera\Downloads\Project_27_3\Restaurant\Restaurant.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:40.73
+=======
          Restaurant.vcxproj -> C:\Users\Alvera\Desktop\New folder\Project_Code_S2019\Debug\Restaurant.exe
      1>Done Building Project "C:\Users\Alvera\Desktop\New folder\Project_Code_S2019\Restaurant\Restaurant.vcxproj" (Rebuild target(s)).
 
 Build succeeded.
 
 Time Elapsed 00:00:28.63
+>>>>>>> f5002feb07fd46685827069b18888cec51bf56e5

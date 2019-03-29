@@ -67,36 +67,48 @@ bool Region::cancelOrder(Order* &canOrder)
 }
 /////////////////////////////////////////
 //6-Assign Normal Orders
+<<<<<<< HEAD
+Order* Region::assignNormal()
+=======
 bool Region::assignNormal()
+>>>>>>> f5002feb07fd46685827069b18888cec51bf56e5
 {
 	//Update it after time step
 	Order * temp;
 
 	bool check=normalOrders.removehead(temp);
-	deliveriedOrder.enqueue(temp);
-	return check;
+	//deliveriedOrder.enqueue(temp);         //@ phase2
+	return temp;
 }
 
 /////////////////////////////////////////
 //7-Assign VIP Orders
+<<<<<<< HEAD
+Order* Region::assignVIP()
+=======
 bool Region::assignVIP()
+>>>>>>> f5002feb07fd46685827069b18888cec51bf56e5
 {
 	//Update it after time step
 	Order * temp;
 	bool check=vipOrders.dequeue(temp);
-	deliveriedOrder.enqueue(temp);
-	return check;
+	//deliveriedOrder.enqueue(temp);         //@ phase2
+	return temp;
 }
 
 /////////////////////////////////////////
 //8-Assign Frozen Orders
+<<<<<<< HEAD
+Order* Region::assignFrozen()
+=======
 bool Region::assignFrozen()
+>>>>>>> f5002feb07fd46685827069b18888cec51bf56e5
 {
 	//Update it after time step
 	Order * temp;
 	bool check=frozenOrders.dequeue(temp);
-	deliveriedOrder.enqueue(temp);
-	return check;
+	//deliveriedOrder.enqueue(temp);            //@ phase2
+	return temp;
 }
 ///////////////////////////////////////////
 //9-get num of fast moto
@@ -146,18 +158,30 @@ regionType=r;
 	for (int i = 0; i < nn; i++)
 	{
 		Newm = new Motorcycle(i+1, TYPE_NRM,sn, regionType, IDLE);
+<<<<<<< HEAD
+		normalMotors.enqueue(Newm,Newm->getreturnedTime()*-1);
+=======
 		normalMotors.enqueue(*Newm);
+>>>>>>> f5002feb07fd46685827069b18888cec51bf56e5
 	}
 	for (int i = 0; i < nf; i++)
 	{
 		Newm = new Motorcycle(i + 1, TYPE_FROZ, sf, regionType, IDLE);
 
+<<<<<<< HEAD
+		frozenMotors.enqueue(Newm,Newm->getreturnedTime()*-1);
+=======
 		frozenMotors.enqueue(*Newm);
+>>>>>>> f5002feb07fd46685827069b18888cec51bf56e5
 	}
 	for (int i = 0; i < nv; i++)
 	{
 		Newm = new Motorcycle(i + 1, TYPE_VIP, sv, regionType, IDLE);
 
+<<<<<<< HEAD
+		fastMotors.enqueue(Newm,Newm->getreturnedTime()*-1);
+=======
 		fastMotors.enqueue(*Newm);
+>>>>>>> f5002feb07fd46685827069b18888cec51bf56e5
 	}
 }

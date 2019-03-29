@@ -10,9 +10,15 @@ class Region
 	List<Order*> normalOrders;                               //the list of normal orders
 	Queue<Order*> frozenOrders;                              //the list of the frozen orders
 	ProQueue<Order*> vipOrders;                              //the list of vip orders 
+<<<<<<< HEAD
+	ProQueue<Motorcycle*> frozenMotors;                          //the list of frozen motorcycles
+	ProQueue<Motorcycle*> fastMotors;                            //the list of fast motorcycles
+	ProQueue<Motorcycle*> normalMotors;                          //the list of normal motorcycles
+=======
 	Queue<Motorcycle> frozenMotors;                          //the list of frozen motorcycles
 	Queue<Motorcycle> fastMotors;                            //the list of fast motorcycles
 	Queue<Motorcycle> normalMotors;                          //the list of normal motorcycles
+>>>>>>> f5002feb07fd46685827069b18888cec51bf56e5
 	int numOfFastMoto,numOfNormMoto,numOfFrozenMoto;         //the number of the Fast,Normal&Frozen motorcycles
 	int numOfVipOrder,numOfNormOrders,numOfFrozenOrders;     //the number of the VIP,Normal&Frozen Orders
 	Queue<Order*> deliveriedOrder;                           //the list of deliveried orders
@@ -21,9 +27,15 @@ class Region
     REGION regionType;                                       //the type of region A,B,C or D
 public:
 	bool cancelOrder(Order *& deletedOrders);                 //interface between Restaurant & region to cancel Normal order
+<<<<<<< HEAD
+    Order* assignNormal();                                     //interface between Resturant & region to assign Normal order
+	Order* assignVIP ();                                       //interface between Restaurant & region to assign VIP order
+	Order* assignFrozen();                                     //interface between Restaurant & region to assign  frozen order
+=======
 	bool assignNormal();                                     //interface between Resturant & region to assign Normal order
 	bool assignVIP ();                                       //interface between Restaurant & region to assign VIP order
 	bool assignFrozen();                                     //interface between Restaurant & region to assign  frozen order
+>>>>>>> f5002feb07fd46685827069b18888cec51bf56e5
 	Region(REGION);
 	Region();                                                //Default Constractor
 	~Region();

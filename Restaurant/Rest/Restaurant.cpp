@@ -1,8 +1,10 @@
+<<<<<<< HEAD
+=======
 #include <cstdlib>
 #include <time.h>
 #include <iostream>
+>>>>>>> f5002feb07fd46685827069b18888cec51bf56e5
 #include "Restaurant.h"
-#include "..\Events\ArrivalEvent.h"
 
 using namespace std;
 
@@ -16,7 +18,10 @@ Restaurant::Restaurant()
 	regionD = new Region(D_REG);
 	numOfOrders = 0;
 	pGUI = new GUI;
+<<<<<<< HEAD
+=======
 	Read();
+>>>>>>> f5002feb07fd46685827069b18888cec51bf56e5
 }
 
 void Restaurant::RunSimulation()
@@ -289,7 +294,16 @@ Order* Restaurant::getDemoOrder()
 }
 
 
+<<<<<<< HEAD
+GUI* Restaurant::getpGUI() 
+{
+	return pGUI;
+}
+
+
+=======
 GUI* Restaurant::getpGUI() { return pGUI; }
+>>>>>>> f5002feb07fd46685827069b18888cec51bf56e5
 Region* Restaurant::getRegion(REGION R)
 {
 	switch (R)
@@ -335,6 +349,7 @@ void Restaurant::setNormalorder(Order* Inorder)
 
 	}
 }
+<<<<<<< HEAD
 
 
 
@@ -347,6 +362,20 @@ void Restaurant::setfrozenorder(Order* Inorder)
 		regionA->addFrozenOrder(Inorder);
 		break;
 
+=======
+
+
+
+void Restaurant::setfrozenorder(Order* Inorder)
+{
+	REGION type = Inorder->GetRegion();
+	switch (type)
+	{
+	case (A_REG):
+		regionA->addFrozenOrder(Inorder);
+		break;
+
+>>>>>>> f5002feb07fd46685827069b18888cec51bf56e5
 	case (B_REG):
 		regionB->addFrozenOrder(Inorder);
 		break;
@@ -409,9 +438,95 @@ void Restaurant :: stepByStepMode(){
 		pGUI->waitForClick();
 		CurrentTimeStep++;	//advance timestep
 	}
+<<<<<<< HEAD
+	pGUI->waitForClick();
+	assignall();
+}
+
+void Restaurant::assignall()
+{
+	Order*deleted;
+
+	deleted=regionA->assignNormal();
+	if(MainOrders.remove(deleted))
+
+
+	delete deleted;
+
+	deleted=regionA->assignFrozen();
+		if(MainOrders.remove(deleted))
+
+	 delete deleted;
+
+
+	deleted=regionA->assignVIP();
+		if(MainOrders.remove(deleted))
+
+		 delete deleted;
+
+
+	/////////
+	deleted=regionB->assignNormal();
+		if(MainOrders.remove(deleted))
+
+		 delete deleted;
+
+
+	deleted=regionB->assignFrozen();
+		if(MainOrders.remove(deleted))
+
+		 delete deleted;
+
+
+	deleted=regionB->assignVIP();
+		if(MainOrders.remove(deleted))
+
+		 delete deleted;
+
+
+	///////////
+	deleted=regionC->assignNormal();
+		if(MainOrders.remove(deleted))
+
+		 delete deleted;
+
+
+	deleted=regionC->assignFrozen();
+		if(MainOrders.remove(deleted))
+
+		 delete deleted;
+
+
+	deleted=regionC->assignVIP();
+		if(MainOrders.remove(deleted))
+
+		 delete deleted;
+
+	/////////
+	deleted=regionD->assignNormal();
+	if(MainOrders.remove(deleted))
+		delete deleted;
+
+
+	deleted=regionD->assignFrozen();
+	if(MainOrders.remove(deleted))
+
+	 delete deleted;
+
+
+	deleted=regionD->assignVIP();
+	if(MainOrders.remove(deleted))
+
+	 delete deleted;
 
 }
 
+
+=======
+
+}
+
+>>>>>>> f5002feb07fd46685827069b18888cec51bf56e5
 ORD_TYPE Restaurant::ChangeTypeOrd(char n){
 	if (n == 'N') { return TYPE_NRM; }
 	else if (n == 'V') { return TYPE_VIP; }

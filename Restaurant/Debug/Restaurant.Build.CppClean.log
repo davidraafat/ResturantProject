@@ -44,6 +44,86 @@ C:\USERS\ALVERA\DESKTOP\NEW FOLDER\PROJECT_CODE_S2019\RESTAURANT\DEBUG\JDATASRC.
 C:\USERS\ALVERA\DESKTOP\NEW FOLDER\PROJECT_CODE_S2019\RESTAURANT\DEBUG\JDCOEFCT.OBJ
 C:\USERS\ALVERA\DESKTOP\NEW FOLDER\PROJECT_CODE_S2019\RESTAURANT\DEBUG\JDCOLOR.OBJ
 C:\USERS\ALVERA\DESKTOP\NEW FOLDER\PROJECT_CODE_S2019\RESTAURANT\DEBUG\JDDCTMGR.OBJ
+<<<<<<< HEAD
+D:\NEW FOLDER (2)\PROJECT_CODE_S2019\RESTAURANT\DEBUG\CMUGRAPHICS.OBJ
+D:\NEW FOLDER (2)\PROJECT_CODE_S2019\RESTAURANT\DEBUG\COLORS.OBJ
+D:\NEW FOLDER (2)\PROJECT_CODE_S2019\RESTAURANT\DEBUG\IMAGE.OBJ
+D:\NEW FOLDER (2)\PROJECT_CODE_S2019\RESTAURANT\DEBUG\KEYQUEUE.OBJ
+D:\NEW FOLDER (2)\PROJECT_CODE_S2019\RESTAURANT\DEBUG\MOUSEQUEUE.OBJ
+D:\NEW FOLDER (2)\PROJECT_CODE_S2019\RESTAURANT\DEBUG\WINDOWINPUT.OBJ
+D:\NEW FOLDER (2)\PROJECT_CODE_S2019\RESTAURANT\DEBUG\DEMO_MAIN.OBJ
+D:\NEW FOLDER (2)\PROJECT_CODE_S2019\RESTAURANT\DEBUG\CANCELLATIONEVENT.OBJ
+D:\NEW FOLDER (2)\PROJECT_CODE_S2019\RESTAURANT\DEBUG\EVENT.OBJ
+D:\NEW FOLDER (2)\PROJECT_CODE_S2019\RESTAURANT\DEBUG\ARRIVALEVENT.OBJ
+D:\NEW FOLDER (2)\PROJECT_CODE_S2019\RESTAURANT\DEBUG\PROMOTIONEVENT.OBJ
+D:\NEW FOLDER (2)\PROJECT_CODE_S2019\RESTAURANT\DEBUG\GUI.OBJ
+D:\NEW FOLDER (2)\PROJECT_CODE_S2019\RESTAURANT\DEBUG\MOTORCYCLE.OBJ
+D:\NEW FOLDER (2)\PROJECT_CODE_S2019\RESTAURANT\DEBUG\ORDER.OBJ
+D:\NEW FOLDER (2)\PROJECT_CODE_S2019\RESTAURANT\DEBUG\RESTAURANT.OBJ
+D:\NEW FOLDER (2)\PROJECT_CODE_S2019\RESTAURANT\DEBUG\VC110.PDB
+C:\USERS\ALVERA\DESKTOP\NEW FOLDER\PROJECT_CODE_S2019\DEBUG\RESTAURANT.ILK
+C:\USERS\ALVERA\DESKTOP\NEW FOLDER\PROJECT_CODE_S2019\DEBUG\RESTAURANT.EXE
+C:\USERS\ALVERA\DESKTOP\NEW FOLDER\PROJECT_CODE_S2019\DEBUG\RESTAURANT.PDB
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\ArrivalEvent.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\CancellationEvent.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\CMUgraphics.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\colors.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\Demo_Main.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\Event.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\GUI.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\image.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\jcomapi.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\jcparam.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\jdapimin.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\jdapistd.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\jdatasrc.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\jdcoefct.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\jdcolor.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\jddctmgr.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\jdhuff.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\jdinput.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\jdmainct.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\jdmarker.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\jdmaster.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\jdmerge.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\jdphuff.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\jdpostct.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\jdsample.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\jdtrans.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\jerror.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\jidctflt.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\jidctfst.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\jidctint.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\jidctred.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\jmemmgr.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\jmemnobs.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\jpegload.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\jquant1.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\jquant2.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\jutils.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\keyqueue.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\Motorcycle.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\mousequeue.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\Order.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\PromotionEvent.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\Restaurant.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\windowinput.obj
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\cl.command.1.tlog
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\CL.read.1.tlog
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\CL.write.1.tlog
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\link-cvtres.read.1.tlog
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\link-cvtres.write.1.tlog
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\link-rc.read.1.tlog
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\link-rc.write.1.tlog
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\link.command.1.tlog
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\link.read.1.tlog
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\link.write.1.tlog
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\vc110.idb
+D:\New folder (2)\Project_Code_S2019\Restaurant\Debug\vc110.pdb
+D:\New folder (2)\Project_Code_S2019\Debug\Restaurant.pdb
+D:\New folder (2)\Project_Code_S2019\Debug\Restaurant.exe
+D:\New folder (2)\Project_Code_S2019\Debug\Restaurant.ilk
+=======
 C:\USERS\ALVERA\DESKTOP\NEW FOLDER\PROJECT_CODE_S2019\DEBUG\RESTAURANT.ILK
 C:\USERS\ALVERA\DESKTOP\NEW FOLDER\PROJECT_CODE_S2019\DEBUG\RESTAURANT.EXE
 C:\USERS\ALVERA\DESKTOP\NEW FOLDER\PROJECT_CODE_S2019\DEBUG\RESTAURANT.PDB
@@ -113,3 +193,4 @@ C:\Users\Alvera\Desktop\New folder\Project_Code_S2019\Restaurant\Debug\vc110.pdb
 C:\Users\Alvera\Desktop\New folder\Project_Code_S2019\Debug\Restaurant.pdb
 C:\Users\Alvera\Desktop\New folder\Project_Code_S2019\Debug\Restaurant.exe
 C:\Users\Alvera\Desktop\New folder\Project_Code_S2019\Debug\Restaurant.ilk
+>>>>>>> f5002feb07fd46685827069b18888cec51bf56e5
