@@ -6,7 +6,10 @@ GUI::GUI()
 	pWind = new window(WindWidth+15,WindHeight,0,0); 
 	pWind->ChangeTitle("The Restautant");
 
-	OrderCount = 0;
+	/*OrderCount = 0;*/
+	VIPcount=0;
+	Frozencount=0;
+	Normalcount=0;
 
 	//Set color for each order type
 	OrdersClrs[TYPE_NRM] = 	DARKBLUE;	//normal-order color
@@ -131,7 +134,7 @@ void GUI::DrawRestArea() const
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////
-void GUI::DrawSingleOrder(Order* pO, int RegionCount) const       // It is a private function
+void GUI::DrawSingleOrder(Order* pO, int RegionCount)     // It is a private function
 {
 
 	if (RegionCount > MaxRegionOrderCount) 
@@ -196,19 +199,21 @@ void GUI::DrawSingleOrder(Order* pO, int RegionCount) const       // It is a pri
 // [Input Parameters]:
 //    orders [ ] : array of Order pointers (ALL orders from all regions in one array)
 //    TotalOrders : the size of the array (total no. of orders)
-void GUI::DrawOrders() const
+void GUI::DrawOrders() 
 {
 
 	//Prepare counter for each region
 	int RegionsCounts[REG_CNT]={0};	//initlaize all counters to zero
-
-	for(int i=0; i<OrderCount; i++)
+	Node<Order*>*ToDraw=OrdList.getHead();
+	
+	while (ToDraw)
 	{
-		int orderRegion = OrdListForDrawing[i]->GetRegion();
-		RegionsCounts[orderRegion]++;
-		DrawSingleOrder(OrdListForDrawing[i], RegionsCounts[orderRegion]);
+	REGION orderRegion = ToDraw->getItem()->GetRegion();
+	RegionsCounts[orderRegion]++;
+	DrawSingleOrder(ToDraw->getItem(), RegionsCounts[orderRegion]);
+	ToDraw=ToDraw->getNext();
 	}
-
+	
 }
 
 void GUI::UpdateInterface() 
@@ -223,8 +228,35 @@ void GUI::UpdateInterface()
 */
 void GUI::AddOrderForDrawing(Order* ptr)
 {
-	if (OrderCount < MaxPossibleOrdCnt) 
-		OrdListForDrawing[OrderCount++] = ptr;
+	ORD_TYPE type=ptr->GetType();
+	if(type==TYPE_VIP)
+	{
+		Node<Order*>* cur=OrdList.getHead();
+		int VIPpos=1,i=0;
+		while(i<=VIPcount&&cur)
+		{
+			if(cur->getItem()->getPriority()>=ptr->getPriority())
+			{
+			i++;
+			VIPpos++;
+			cur=cur->getNext();
+			}
+		}
+		OrdList.insertpos(VIPpos,ptr);
+		VIPcount++;
+	}
+	
+	else if(type==TYPE_FROZ)
+	{
+		OrdList.insertpos(VIPcount+Frozencount+1,ptr);
+		Frozencount++;
+	}
+	else if(type==TYPE_NRM)
+	{
+		OrdList.insertpos(VIPcount+Frozencount+Normalcount+1,ptr);
+		Normalcount++;
+	}
+	
 
 	// Note that this function doesn't allocate any Order objects
 	// It only makes the first free pointer in the array
@@ -233,7 +265,7 @@ void GUI::AddOrderForDrawing(Order* ptr)
 
 void GUI::ResetDrawingList()
 {
-	OrderCount = 0;		//resets the orders count to be ready for next timestep updates
+		//resets the orders count to be ready for next timestep updates
 }
 
 

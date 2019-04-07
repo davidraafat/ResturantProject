@@ -23,7 +23,7 @@ private:
 	List<Order*> MainOrders;
 	int numOfOrders;
 	//	DEMO-related members. Should be removed in phases 1&2
-	ProQueue<Order*> DEMO_Queue;	//Important:This is just for demo
+	Queue<Order*> DEMO_Queue;	//Important:This is just for demo
 	// TODO: Add More Data Members As Needed
 	//
 	int speedOfFastMoto, speedOfNormMoto, speedOfFrozenMoto;         //the number of the Fast,Normal&Frozen motorcycles

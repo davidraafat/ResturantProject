@@ -162,14 +162,5 @@ regionType=r;
 	}
 }
 
-///////////////////////////
-Order* Region::getfront()
-{
-	Order * pord;
-	if (vipOrders.dequeue(pord))
-	{
-	return pord;
-	}
-	else 
-		return nullptr;
-}
+
+////////////////////////

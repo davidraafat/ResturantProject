@@ -15,6 +15,7 @@ public:
 //	List(const List<T> & list );
 	bool isEmpty();    
 	bool insert(T newEntry);
+	bool insertpos(int newPosition,const T& newEntry);
 	bool remove(T & xItem);
 	T getentry(int id);
 	bool removehead(T &temp);          //To remove the first element
@@ -120,6 +121,36 @@ bool List<T>::insert(T newEntry)
 		}
 }
 ////////////////////////////////////
+
+template <typename T>
+bool List<T>::insertpos( int newPosition,const T & newEntry)
+{
+bool ableToInsert = (newPosition >= 1);
+if (ableToInsert)
+{
+// Create a new node containing the new entry
+Node<T>* newNodePtr = new Node<T>(newEntry);
+// Attach new node to chain
+if (newPosition == 1)
+{
+// Insert new node at beginning of chain
+newNodePtr->setNext(head);
+head = newNodePtr;
+}
+else
+{
+// Find node that will be before new node
+Node<T>* prevPtr = getNodeAt(newPosition - 1);
+// Insert new node after node to which prevPtr points
+newNodePtr->setNext(prevPtr->getNext());
+prevPtr->setNext(newNodePtr);
+} // end if
+
+} // end if
+return ableToInsert;
+} // end insert
+
+/////////////////////////////////////
 template<class T>
 Node<T>* List<T>::getNodeAt(int pos)
 {

@@ -5,6 +5,8 @@
 #include "..\Defs.h"
 
 #include "..\Rest\Order.h"
+#include "..\Generic_DS\List.h"
+#include "..\Generic_DS\Node.h"
 
 #include <string>
 using namespace std;
@@ -56,24 +58,25 @@ private:
 	////////
 	////////
 
-	int OrderCount;		//the total number of orders to be drawn
-	
-	Order * OrdListForDrawing[MaxPossibleOrdCnt]; // This Array of Pointers is used for drawing elements in the GUI
+
 	//NOTES: 
 	//Orders are assumed to be sorted by arrival time
 	// At every time step, you should update those pointers 
 	// to point to the current waiting orders only
 	
-
-
+   
+	List<Order*> OrdList;
+	int VIPcount;
+	int Frozencount;
+	int Normalcount;
 
 
 	// 
 	// TODO: Add more members if needed
 	//
 
-	void DrawSingleOrder(Order* pO, int RegionCount) const;		//draws ONE order 
-	void DrawOrders() const;		//drwas ALL orders in OrdListForDrawing
+	void DrawSingleOrder(Order* pO, int RegionCount) ;		//draws ONE order 
+	void DrawOrders() ;		//drwas ALL orders in OrdListForDrawing
 
 
 

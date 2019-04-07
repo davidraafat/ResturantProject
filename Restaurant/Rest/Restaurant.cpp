@@ -400,22 +400,19 @@ void Restaurant :: stepByStepMode(){
 		ExecuteEvents(CurrentTimeStep);	//execute all events at current time step
 		//The above line may add new orders to the DEMO_Queue
 		//Let's draw all arrived orders by passing them to the GUI to draw
-		while (regionA->getfront())
-		{
-		
-		
-		}
-		while(DEMO_Queue.dequeue(pOrd))
+	
+		while (DEMO_Queue.dequeue(pOrd))
 		{
 			pGUI->AddOrderForDrawing(pOrd);
-			pGUI->UpdateInterface();
+			pGUI->UpdateInterface(); 
 		}
+	
 		//wiat for mouse click 
 		pGUI->waitForClick();
 
 		CurrentTimeStep++;	//advance timestep.
-	    pGUI->waitForClick();
-	    assignall();
+	   /* pGUI->waitForClick();
+	    assignall();*/
 	}
 	
 }
@@ -426,8 +423,6 @@ void Restaurant::assignall()
 
 	deleted=regionA->assignNormal();
 	if(MainOrders.remove(deleted))
-
-
 	delete deleted;
 
 	deleted=regionA->assignFrozen();
@@ -487,7 +482,6 @@ void Restaurant::assignall()
 
 	deleted=regionD->assignFrozen();
 	if(MainOrders.remove(deleted))
-
 	 delete deleted;
 
 
