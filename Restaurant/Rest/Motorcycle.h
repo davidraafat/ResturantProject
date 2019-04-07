@@ -8,16 +8,27 @@
 class Motorcycle	
 {
 	int ID;
-	ORD_TYPE type;	//for each order type there is a corresponding motorcycle type 
-	int speed;		//meters it can move in one clock tick (in one timestep)
-	REGION	region;	//region of the motorcycle
-	STATUS	status;	//idle or in-service
+	ORD_TYPE type;    	//for each order type there is a corresponding motorcycle type 
+	int speed;		    //meters it can move in one clock tick (in one timestep)
+	REGION	region;  	//region of the motorcycle
+	STATUS	status;	    //idle or in-service
+	int returnedTime;   //time to return (current time step+ 2*distance/speed)
 	
 
 public:
 	Motorcycle();
-	Motorcycle(int sp);
+	Motorcycle(int id,ORD_TYPE Type,int Speed,REGION r,STATUS currentStatus);
+	int getID();
+	ORD_TYPE getType();
+	int getSpeed();
+	REGION getRegion();
+	STATUS getStatus();
+	void setreturnedTime(int,int );
+	int getreturnedTime();
+	void setStatus(STATUS );
+	bool compare(int TimeStep);
 	virtual ~Motorcycle();
+
 };
 
 #endif

@@ -120,10 +120,10 @@
     <ClInclude Include="Generic_DS\Queue.h">
       <Filter>Generic_DS</Filter>
     </ClInclude>
-    <ClInclude Include="CancellationEvent.h">
+    <ClInclude Include="Events\PromotionEvent.h">
       <Filter>Events</Filter>
     </ClInclude>
-    <ClInclude Include="PromotionEvent.h">
+    <ClInclude Include="Events\CancellationEvent.h">
       <Filter>Events</Filter>
     </ClInclude>
   </ItemGroup>
@@ -255,10 +255,10 @@
     <ClCompile Include="Rest\Region.cpp">
       <Filter>Restaurant</Filter>
     </ClCompile>
-    <ClCompile Include="CancellationEvent.cpp">
+    <ClCompile Include="Events\PromotionEvent.cpp">
       <Filter>Events</Filter>
     </ClCompile>
-    <ClCompile Include="PromotionEvent.cpp">
+    <ClCompile Include="Events\CancellationEvent.cpp">
       <Filter>Events</Filter>
     </ClCompile>
   </ItemGroup>
@@ -269,6 +269,5 @@
     <Text Include="CMUgraphicsLib\Readme.txt">
       <Filter>CMUGraphicsLib</Filter>
     </Text>
-    <Text Include="Text.txt" />
   </ItemGroup>
 </Project>

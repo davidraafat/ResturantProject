@@ -1,18 +1,22 @@
 #include "Order.h"
 
-Order::Order(int id, ORD_TYPE r_Type, REGION r_region)
+Order::Order(int id, ORD_TYPE r_Type, REGION r_region, int Dis, double totalMon, int artm)
 {
 	ID = (id>0&&id<1000)?id:0;	//1<ID<999
 	type = r_Type;
 	Region = r_region;	
-	priority=0.5*totalMoney+Distance+200/float(ArrTime);
+	Distance = Dis;
+	totalMoney = totalMon;
+	ArrTime = artm;
+	priority=0.5*totalMoney+Distance+200/double(ArrTime);
 
 }
 
-//Order::Order()
-//{}
+Order::Order()
+{
+}
 
-float Order::getPriority()
+double Order::getPriority()
 {
 	return priority;
 }
@@ -26,13 +30,19 @@ int Order::GetID()
 	return ID;
 }
 
+void Order::setType(ORD_TYPE newtype)
+{
+	type = newtype;
+
+}
+
 void Order::setExtraMoney(double extra)
 {
 	totalMoney+=extra;
 }
 
 
-int Order::GetType() const
+ORD_TYPE Order::GetType() const
 {
 	return type;
 }
@@ -71,10 +81,9 @@ int Order::getFinishTime()
 {
 	return FinishTime;
 }
-bool Order::operator==(Order o)
+
+bool Order::operator==(Order compared)
 {
-	if(o.GetID()==ID){return true;}	
-	else{return false;}	
-
+	if(ID==compared.GetID())  return true;
+	else return false;
 }
-
