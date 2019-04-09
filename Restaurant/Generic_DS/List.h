@@ -201,6 +201,10 @@ bool List<T>::remove(T & xItem)
 		}
 	else if(next->getItem()==xItem)
 		{
+		if (next == tail)
+		{
+			tail = prev;
+		}
 		prev->setNext(next->getNext());
 		delete next;
 		return true;
@@ -242,6 +246,7 @@ bool List<T>::removehead(T &temp)
 	if (head==NULL) return false;
 	if(head==tail)
 	{
+		temp = head->getItem();
 		delete head;
        	head=tail=nullptr;
 		return true;
@@ -251,6 +256,7 @@ bool List<T>::removehead(T &temp)
 	Node<T>*next=head;
 	    temp=next->getItem();
 		head=head->getNext();
+		
 		delete next;
 		return true;
 	}

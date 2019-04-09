@@ -69,6 +69,7 @@ private:
 	int VIPcount;
 	int Frozencount;
 	int Normalcount;
+	int numofLines;
 
 
 	// 
@@ -83,7 +84,6 @@ private:
 	void DrawString(const int iX, const int iY, const string Text); // prints a message in the passed coordinates
 	void DrawRestArea() const;	    // draws the restaurant area
 
-	void ClearStatusBar() const;    // clears the status bar
 	void ClearDrawingArea() const;	// clears the Drawing area from all drawings
 
 public:
@@ -96,12 +96,12 @@ public:
 
 	// Output Functions  ---------------------------
 	void PrintMessage(string msg) const; // prints a message in the status bar
-
-
+	void AddLine();
+	void ClearStatusBar() const;    // clears the status bar
 	void UpdateInterface();
 	void AddOrderForDrawing(Order* pOrd);	//Adds a new order to the drawing list
 	void ResetDrawingList();		//resets drawing list (should be called every timestep after drawing)
-
+	void deleteorder(Order *);
 	PROG_MODE getGUIMode() const;			//returns the mode of the program
 
 };

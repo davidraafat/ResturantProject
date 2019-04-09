@@ -1,8 +1,19 @@
-﻿Build started 4/7/2019 8:07:25 PM.
+﻿Build started 4/9/2019 9:40:57 PM.
      1>Project "D:\New folder (2)\project last merge\Restaurant\Restaurant.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt GUI\GUI.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt GUI\GUI.cpp Rest\Restaurant.cpp
+         Restaurant.cpp
+     1>d:\new folder (2)\project last merge\restaurant\rest\restaurant.cpp(242): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>d:\new folder (2)\project last merge\restaurant\rest\restaurant.cpp(285): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdlib.h(909) : see declaration of 'itoa'
+     1>d:\new folder (2)\project last merge\restaurant\rest\restaurant.cpp(241): warning C4101: 'pEv' : unreferenced local variable
+     1>d:\new folder (2)\project last merge\restaurant\rest\restaurant.cpp(438): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdlib.h(909) : see declaration of 'itoa'
+     1>d:\new folder (2)\project last merge\restaurant\rest\restaurant.cpp(427): warning C4101: 'pEv' : unreferenced local variable
          GUI.cpp
+         Generating Code...
+     1>d:\new folder (2)\project last merge\restaurant\rest\restaurant.cpp(648): warning C4715: 'Restaurant::ChangeTypeOrd' : not all control paths return a value
+     1>d:\new folder (2)\project last merge\restaurant\rest\restaurant.cpp(655): warning C4715: 'Restaurant::ChangeTypeReg' : not all control paths return a value
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\New folder (2)\project last merge\Debug\Restaurant.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\New folder (2)\project last merge\Debug\Restaurant.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\New folder (2)\project last merge\Debug\Restaurant.lib" /MACHINE:X86 Debug\CMUgraphics.obj
          Debug\colors.obj
@@ -54,4 +65,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:02.55
+Time Elapsed 00:00:04.37

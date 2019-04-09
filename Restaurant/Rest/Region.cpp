@@ -73,6 +73,7 @@ Order* Region::assignNormal()
 	Order * temp;
 
 	bool check=normalOrders.removehead(temp);
+	numOfNormOrders--;
 	//deliveriedOrder.enqueue(temp);         //@ phase2
 	return temp;
 }
@@ -84,6 +85,7 @@ Order* Region::assignVIP()
 	//Update it after time step
 	Order * temp;
 	bool check=vipOrders.dequeue(temp);
+	numOfVipOrder--;
 	//deliveriedOrder.enqueue(temp);         //@ phase2
 	return temp;
 }
@@ -95,6 +97,7 @@ Order* Region::assignFrozen()
 	//Update it after time step
 	Order * temp;
 	bool check=frozenOrders.dequeue(temp);
+	numOfFrozenOrders--;
 	//deliveriedOrder.enqueue(temp);            //@ phase2
 	return temp;
 }

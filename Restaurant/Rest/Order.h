@@ -39,7 +39,7 @@ public:
 	//
 
 	void setExtraMoney(double );
-
+	void setpriority();
 	double getMoney();
 	int getArrTime();
 	int getServTime();

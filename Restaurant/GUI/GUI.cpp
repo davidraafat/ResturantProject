@@ -10,6 +10,7 @@ GUI::GUI()
 	VIPcount=0;
 	Frozencount=0;
 	Normalcount=0;
+	numofLines=1;
 
 	//Set color for each order type
 	OrdersClrs[TYPE_NRM] = 	DARKBLUE;	//normal-order color
@@ -63,8 +64,8 @@ string GUI::GetString() const
 
 void GUI::PrintMessage(string msg) const	//Prints a message on status bar
 {
-	ClearStatusBar();	//First clear the status bar
-	
+   
+	ClearStatusBar();
 	pWind->SetPen(DARKRED);
 	pWind->SetFont(18, BOLD , BY_NAME, "Arial");   
 	pWind->DrawString(10, WindHeight - (int) (StatusBarHeight/1.5), msg); // You may need to change these coordinates later 
@@ -191,7 +192,11 @@ void GUI::DrawSingleOrder(Order* pO, int RegionCount)     // It is a private fun
 	pWind->SetFont(20,BOLD, MODERN);
 	pWind->DrawInteger(x,y,pO->GetID());
 }
-
+///////////////////////////////////
+void GUI::AddLine()
+{
+	numofLines++;
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////
 /* A function to draw a list of orders and ensure there is no overflow in the drawing*/
@@ -233,14 +238,14 @@ void GUI::AddOrderForDrawing(Order* ptr)
 	{
 		Node<Order*>* cur=OrdList.getHead();
 		int VIPpos=1,i=0;
-		while(i<=VIPcount&&cur)
+		while(cur && i<=VIPcount)
 		{
 			if(cur->getItem()->getPriority()>=ptr->getPriority())
 			{
 			i++;
 			VIPpos++;
-			cur=cur->getNext();
 			}
+			cur = cur->getNext();
 		}
 		OrdList.insertpos(VIPpos,ptr);
 		VIPcount++;
@@ -266,6 +271,25 @@ void GUI::AddOrderForDrawing(Order* ptr)
 void GUI::ResetDrawingList()
 {
 		//resets the orders count to be ready for next timestep updates
+}
+
+void GUI::deleteorder(Order *deleteord)
+{
+	ORD_TYPE type = deleteord->GetType();
+	switch (type)
+	{
+	case TYPE_NRM:
+		 Normalcount--;
+		break;
+	case TYPE_FROZ:
+		Frozencount--;
+
+		break;
+	case TYPE_VIP:
+		VIPcount--;
+		break;
+	}
+	OrdList.remove(deleteord);
 }
 
 

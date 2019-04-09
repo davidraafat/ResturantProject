@@ -41,5 +41,6 @@ public:
 	void setmotorsinfo(int sn, int sf, int sv, int nn, int nf, int nv);
 
 
+
 };
 

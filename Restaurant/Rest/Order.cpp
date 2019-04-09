@@ -8,12 +8,16 @@ Order::Order(int id, ORD_TYPE r_Type, REGION r_region, int Dis, double totalMon,
 	Distance = Dis;
 	totalMoney = totalMon;
 	ArrTime = artm;
-	priority=0.5*totalMoney+Distance+200/double(ArrTime);
-
+	setpriority();
 }
 
 Order::Order()
 {
+}
+
+void Order ::setpriority()
+{
+	priority=0.5*totalMoney+Distance+200/double(ArrTime);
 }
 
 double Order::getPriority()

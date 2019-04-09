@@ -38,7 +38,7 @@ public:
 	void ExecuteEvents(int TimeStep);	//executes all events at current timestep
 	void RunSimulation();
 	Order* FindOrder(int ID);
-	void cancellNormal(int ID);
+	void cancellNormal(int ID,int time);
 	void PromoteOrder(int ID,double extraMoney);
 	/// ==> 
 	///  DEMO-related functions. Should be removed in phases 1&2
