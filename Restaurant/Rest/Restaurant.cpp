@@ -6,40 +6,154 @@ using namespace std;
 
 Restaurant::Restaurant() 
 {
+
 	regionA = new Region(A_REG);
 	regionB = new Region(B_REG);
 	regionC = new Region(C_REG);
 	regionD = new Region(D_REG);
 	numOfOrders = 0;
+	notdele = 0;
+	notpromot = 0;
 	pGUI = new GUI;
+
 }
 
+//////////////////////////
+Restaurant::~Restaurant()
+{
+	    delete regionA;
+	    delete regionB;
+	    delete regionC;
+	    delete regionD;
+	Order *delOrd;
+	while (MainOrders.removehead(delOrd))
+	{
+		delete delOrd;
+	}
+	Event*temp;
+	while(!EventsQueue.isEmpty())
+	{
+		EventsQueue.dequeue(temp);
+		delete temp;
+	}
+	
+		delete pGUI;
+
+}
+
+/////////////////////////
+void Restaurant ::Read(){
+	ArrivalEvent* ev;
+	CancellationEvent* ec;
+	PromotionEvent* ep;
+	ORD_TYPE ord;
+	REGION reg;
+	int time, id, dest, mon, extrMon;
+	int sn, sf, sv, n, f, v, timeProm, numEvent;
+	char typeEve, typeorder, typeReg;
+	pGUI->PrintMessage("enter file name please ",1);
+	string s = pGUI->GetString();
+	ifstream myfile(s + ".txt");
+	
+	if (myfile.is_open())
+	{
+		myfile >> sn >> sf >> sv;
+		myfile >> n >> f >> v;
+		if ((sn > 0) && (sf > 0) && (sv > 0) && (n > 0) && (f > 0) && (v > 0))
+		{
+			getRegion(A_REG)->setmotorsinfo(sn, sf, sv, n, f, v);
+
+			myfile >> n >> f >> v;
+			if ( (n > 0) && (f > 0) && (v > 0))
+			{
+				getRegion(B_REG)->setmotorsinfo(sn, sf, sv, n, f, v);
+
+				myfile >> n >> f >> v;
+				if ( (n > 0) && (f > 0) && (v > 0))
+				{
+					getRegion(C_REG)->setmotorsinfo(sn, sf, sv, n, f, v);
+
+					myfile >> n >> f >> v;
+					if ( (n > 0) && (f > 0) && (v > 0))
+					{
+						getRegion(D_REG)->setmotorsinfo(sn, sf, sv, n, f, v);
+
+						myfile >> timeProm >> numEvent;////////
+						setTimeOrdPr(timeProm);
+						for (int i = 0; i < numEvent; i++)//
+						{
+							myfile >> typeEve;
+							if (typeEve == 'R')
+							{
+								myfile >> time >> typeorder >> id >> dest >> mon >> typeReg;
+								ord = ChangeTypeOrd(typeorder);
+								reg = ChangeTypeReg(typeReg);
+								ev = new ArrivalEvent(time, ord, id, dest, mon, reg);
+								AddEvent(ev);
+							}
+							else if (typeEve == 'X')
+							{
+								myfile >> time >> id;
+								ec = new CancellationEvent(time, id);
+								AddEvent(ec);
+							}
+							else if (typeEve == 'P')
+							{
+								myfile >> time >> id >> extrMon;
+								ep = new PromotionEvent(time, id, extrMon);
+								AddEvent(ep);
+							}
+						}
+						myfile.close();
+					}
+					else
+						pGUI->PrintMessage("your orders cannot be saved ; becouse you enter invalid data at first", 1);
+				}
+				else
+					pGUI->PrintMessage("your orders cannot be saved ; becouse you enter invalid data at first", 1);
+			}
+			else
+				pGUI->PrintMessage("your orders cannot be saved ; becouse you enter invalid data at first", 1);
+			}
+		else
+			pGUI->PrintMessage("your orders cannot be saved ; becouse you enter invalid data at first", 1);
+	}
+	else {
+		pGUI->PrintMessage("File cannot be opened",1);
+	}
+}
+//////////////////////////
+GUI* Restaurant::getpGUI() 
+{
+	return pGUI;
+}
+
+//////////////////////////
 void Restaurant::RunSimulation()
 {
 	if (pGUI == NULL)
 	pGUI = new GUI;
+
 	PROG_MODE	mode = pGUI->getGUIMode();
 		
 	switch (mode)	//Add a function for each mode in next phases
 	{
 	case MODE_INTR:
 		break;
+
 	case MODE_STEP:
 		stepByStepMode();
 		break;
+
 	case MODE_SLNT:
 		break;
-	case MODE_DEMO:
-		Just_A_Demo();
-
 	};
 
 }
 
-
-
 //////////////////////////////////  Event handling functions   /////////////////////////////
-void Restaurant::AddEvent(Event* pE)	//adds a new event to the queue of events
+//adds a new event to the queue of events
+void Restaurant::AddEvent(Event* pE)	
 {
 	EventsQueue.enqueue(pE);
 }
@@ -52,30 +166,55 @@ void Restaurant::ExecuteEvents(int CurrentTimeStep)
 	{
 		if(pE->getEventTime() > CurrentTimeStep )	//no more events at current time
 			return;
-
+		
 		pE->Execute(this);
 		EventsQueue.dequeue(pE);	//remove event from the queue
-		delete pE;		//deallocate event object from memory
+		delete pE;	            	//deallocate event object from memory
 	}
 
 }
 
-
 ///////////////////////////
+void Restaurant :: stepByStepMode(){	
+		
+	pGUI->PrintMessage("Step by step mode. ",1);
+	pGUI->UpdateInterface();
+
+	int EvTime = 0;
+	int CurrentTimeStep = 1;
+
+	//as long as events queue is not empty yet
+	while(!EventsQueue.isEmpty())
+	{
+		
+		ExecuteEvents(CurrentTimeStep);	//execute all events at current time step
+		//The above line may add new orders to the ToDrawOrders
+		//Let's draw all arrived orders by passing them to the GUI to draw
+
+		PrepareDrawingOrders();	
+		PrintInfoSB(CurrentTimeStep,notdele,notpromot);
+		//wiat for mouse click
+	    pGUI->waitForClick();
+	    assignall();
+		PrintInfoSB(CurrentTimeStep,notdele,notpromot);
+		pGUI->UpdateInterface();
+		pGUI->waitForClick();
+		CurrentTimeStep++;	//advance timestep.
+		pGUI->ResetDrawingList();
+
+	}
+	
+}
+/////////////////////////
 Order*  Restaurant::FindOrder(int ID)
 {
-	
-	Node<Order*>*ptr1 = MainOrders.getHead();
-	for (int i = 0; i < numOfOrders; i++)
+	Node<Order*>*ptr;
+	for (int i = 1; i <= numOfOrders; i++)
 	{
-		if (ptr1 == NULL) return nullptr;
-		else if (ptr1->getItem()->GetID() == ID)
-			return (ptr1->getItem());
-		else
-			{
-
-				ptr1=ptr1->getNext();
-		   }
+		ptr=MainOrders.getNodeAt(i);
+		if(ptr->getItem()->GetID()==ID)
+			return ptr->getItem();
+		ptr=ptr->getNext();
 	}
 	return NULL;
 }
@@ -97,9 +236,6 @@ void Restaurant::cancellNormal(int ID,int time)
 				regionA->cancelOrder(deletedOrder);
 				if (MainOrders.remove(deletedOrder))
 				{
-					pGUI->deleteorder(deletedOrder);
-					pGUI->UpdateInterface();
-					delete deletedOrder;
 					numOfOrders--;
 				}
 				break;
@@ -108,9 +244,6 @@ void Restaurant::cancellNormal(int ID,int time)
 				regionB->cancelOrder(deletedOrder);
 				if (MainOrders.remove(deletedOrder))
 				{
-					pGUI->deleteorder(deletedOrder);
-					pGUI->UpdateInterface();
-					delete deletedOrder;
 					numOfOrders--;
 				}
 				break;
@@ -119,9 +252,6 @@ void Restaurant::cancellNormal(int ID,int time)
 				regionC->cancelOrder(deletedOrder);
 				if (MainOrders.remove(deletedOrder))
 				{
-					pGUI->deleteorder(deletedOrder);
-					pGUI->UpdateInterface();
-					delete deletedOrder;
 					numOfOrders--;
 				}
 				break;
@@ -130,27 +260,26 @@ void Restaurant::cancellNormal(int ID,int time)
 				regionD->cancelOrder(deletedOrder);
 				if (MainOrders.remove(deletedOrder))
 				{
-					pGUI->deleteorder(deletedOrder);
-					pGUI->UpdateInterface();
-					delete deletedOrder;
 					numOfOrders--;
 				}
 				break;
 
 
 			}
+			PrepareDrawingOrders();
 		}
 		else 
 		{
-			//pGUI->ClearStatusBar();
-			pGUI->PrintMessage(std::to_string(time) + " , This ordered had been promoted so it can't be cancelled!");
+			
+			notdele =1;
 		}
 
 	}
-	else return;
+	else notdele =1;
 }
+
 //////////////////////////
-void Restaurant::PromoteOrder(int ID,double extraMoney)
+void Restaurant::PromoteOrder(int ID,double extraMoney, int time)
 {
 	Order * promoted=FindOrder(ID);
 	if (promoted)
@@ -164,172 +293,188 @@ void Restaurant::PromoteOrder(int ID,double extraMoney)
 			case A_REG:
 
 				regionA->cancelOrder(promoted);
-				pGUI->deleteorder(promoted);
 				promoted->setType(TYPE_VIP);
 				promoted->setExtraMoney(extraMoney);
-				pGUI->AddOrderForDrawing(promoted);
-				pGUI->UpdateInterface();
 				regionA->addVipOrder(promoted);
 				break;
 
 			case B_REG:
 				regionB->cancelOrder(promoted);
-				pGUI->deleteorder(promoted);
-				pGUI->UpdateInterface();
 				promoted->setType(TYPE_VIP);
 				promoted->setExtraMoney(extraMoney);
-				pGUI->AddOrderForDrawing(promoted);
-				pGUI->UpdateInterface();
 				regionB->addVipOrder(promoted);
-
-
 				break;
 
 			case C_REG:
 				regionC->cancelOrder(promoted);
-				pGUI->deleteorder(promoted);
 				promoted->setType(TYPE_VIP);
 				promoted->setExtraMoney(extraMoney);
-				pGUI->AddOrderForDrawing(promoted);
-				pGUI->UpdateInterface();
 				regionC->addVipOrder(promoted);
-
 				break;
 
 			case D_REG:
 				regionD->cancelOrder(promoted);
-				pGUI->deleteorder(promoted);
 				promoted->setType(TYPE_VIP);
 				promoted->setExtraMoney(extraMoney);
-				pGUI->AddOrderForDrawing(promoted);
-				pGUI->UpdateInterface();
 				regionD->addVipOrder(promoted);
-
-
 				break;
-
-
 			}
+			PrepareDrawingOrders();
+			PrintInfoSB(time);
 		}
-	}
-	else return;
-}
-//////////////////////////
-Restaurant::~Restaurant()
-{
-		delete pGUI;
-}
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-/// ==> 
-///  DEMO-related functions. Should be removed in phases 1&2
-
-//This is just a demo function for project introductory phase
-//It should be removed starting phase 1
-void Restaurant::Just_A_Demo()
-{
-	
-	//
-	// THIS IS JUST A DEMO FUNCTION
-	// IT SHOULD BE REMOVED IN PHASE 1 AND PHASE 2
-	
-	int EventCnt;	
-	Order* pOrd;
-	Event* pEv;
-	srand(time(NULL));
-
-	pGUI->PrintMessage("Just a Demo. Enter EVENTS Count(next phases should read I/P filename):");
-	EventCnt = atoi(pGUI->GetString().c_str());	//get user input as a string then convert to integer
-
-	pGUI->UpdateInterface();
-
-	pGUI->PrintMessage("Generating orders randomly... In next phases, orders should be loaded from a file");
+		else
+			notpromot = 1;
 		
-	int EvTime = 0;
-	
-	//Create Random events
-	//All generated event will be "ArrivalEvents" for the demo
-	//for(int i=0; i<EventCnt; i++)
-	//{
-	//	int O_id = i+1;
-	//	
-	//	//Rendomize order type
-	//	int OType;
-	//	if(i<EventCnt*0.2)	//let 1st 20% of orders be VIP (just for sake of demo)
-	//		OType = TYPE_VIP;
-	//	else if(i<EventCnt*0.5)	
-	//		OType = TYPE_FROZ;	//let next 30% be Frozen
-	//	else
-	//		OType = TYPE_NRM;	//let the rest be normal
-
-	//	
-	//	int reg = rand()% REG_CNT;	//randomize region
-
-
-	//	//Randomize event time
-	//	EvTime += rand()%4;
-	////	pEv = new ArrivalEvent(EvTime,O_id,(ORD_TYPE)OType,(REGION)reg);
-	//	//AddEvent(pEv);
-
-	//}	
-
-	int CurrentTimeStep = 1;
-	//as long as events queue is not empty yet
-	while(!EventsQueue.isEmpty())
-	{
-		//print current timestep
-		char timestep[10];
-		itoa(CurrentTimeStep,timestep,10);	
-		pGUI->PrintMessage(timestep);
-
-
-		ExecuteEvents(CurrentTimeStep);	//execute all events at current time step
-		//The above line may add new orders to the DEMO_Queue
-
-		//Let's draw all arrived orders by passing them to the GUI to draw
-
-		while(DEMO_Queue.dequeue(pOrd))
-		{
-			pGUI->AddOrderForDrawing(pOrd);
-			pGUI->UpdateInterface();
-		}
-		Sleep(1000);
-		CurrentTimeStep++;	//advance timestep
 	}
-
-
-	pGUI->PrintMessage("generation done, click to END program");
-	pGUI->waitForClick();
-
-	
+	else notpromot = 1;
 }
-////////////////
 
-void Restaurant::AddtoDemoQueue(Order *pOrd)
+///////////////////////////
+void Restaurant::PrepareDrawingOrders()
 {
-	DEMO_Queue.enqueue(pOrd);
-	MainOrders.insert(pOrd);
-	numOfOrders++;
-}
+	pGUI->ResetDrawingList();
+ Order*const*temp=regionA->VIPToArr();
+		for(int i=0;i<regionA->getNVipOrder();i++)
+	     { 
+			pGUI->AddOrderForDrawing(temp[i]);
+			pGUI->UpdateInterface();
 
-Order* Restaurant::getDemoOrder()
+	     }
+		delete [] temp;
+		temp=regionA->FrozenToArr();
+		for(int i=0;i<regionA->getNFOrders();i++)
+	     { 
+			pGUI->AddOrderForDrawing(temp[i]);
+			pGUI->UpdateInterface();
+
+	     }
+		delete [] temp;
+
+		temp=regionA->NormalToArr();
+		for(int i=0;i<regionA->getNNOrders();i++)
+	     { 
+			pGUI->AddOrderForDrawing(temp[i]);
+			pGUI->UpdateInterface();
+
+	     }
+		delete [] temp;
+
+		//////////////////
+			temp=regionB->VIPToArr();
+		for(int i=0;i<regionB->getNVipOrder();i++)
+	     { 
+			pGUI->AddOrderForDrawing(temp[i]);
+			pGUI->UpdateInterface();
+
+	     }
+		delete [] temp;
+
+		temp=regionB->FrozenToArr();
+		for(int i=0;i<regionB->getNFOrders();i++)
+	     { 
+			pGUI->AddOrderForDrawing(temp[i]);
+			pGUI->UpdateInterface();
+
+	     }
+		delete [] temp;
+
+		temp=regionB->NormalToArr();
+		for(int i=0;i<regionB->getNNOrders();i++)
+	     { 
+			pGUI->AddOrderForDrawing(temp[i]);
+			pGUI->UpdateInterface();
+
+	     }
+		delete [] temp;
+
+		/////////////////////
+			temp=regionC->VIPToArr();
+		for(int i=0;i<regionC->getNVipOrder();i++)
+	     { 
+			pGUI->AddOrderForDrawing(temp[i]);
+			pGUI->UpdateInterface();
+
+	     }
+		delete [] temp;
+
+		temp=regionC->FrozenToArr();
+		for(int i=0;i<regionC->getNFOrders();i++)
+	     { 
+			pGUI->AddOrderForDrawing(temp[i]);
+			pGUI->UpdateInterface();
+
+	     }
+		delete [] temp;
+
+		temp=regionC->NormalToArr();
+		for(int i=0;i<regionC->getNNOrders();i++)
+	     { 
+			pGUI->AddOrderForDrawing(temp[i]);
+			pGUI->UpdateInterface();
+
+	     }
+		delete [] temp;
+
+		//////////////////
+	    temp=regionD->VIPToArr();
+		for(int i=0;i<regionD->getNVipOrder();i++)
+	     { 
+			pGUI->AddOrderForDrawing(temp[i]);
+			pGUI->UpdateInterface();
+
+	     }
+		delete [] temp;
+
+		temp=regionD->FrozenToArr();
+		for(int i=0;i<regionD->getNFOrders();i++)
+	     { 
+			pGUI->AddOrderForDrawing(temp[i]);
+			pGUI->UpdateInterface();
+
+	     }
+		delete [] temp;
+
+		temp=regionD->NormalToArr();
+		for(int i=0;i<regionD->getNNOrders();i++)
+	     { 
+			pGUI->AddOrderForDrawing(temp[i]);
+			pGUI->UpdateInterface();
+	     }
+		delete [] temp;
+
+
+}
+////////////////////////////
+void Restaurant::PrintInfoSB(int time,bool nc,bool np)
 {
-	Order* pOrd;
-	DEMO_Queue.dequeue(pOrd);
-	return pOrd;
+	pGUI->PrintMessage(std::to_string(time),1);
+	    pGUI->PrintMessage("Region A: NormalO= "+std::to_string(regionA->getNNOrders())+" ,VIPO="+std::to_string(regionA->getNVipOrder())+" ,FrozenO="+std::to_string(regionA->getNFOrders())+"  - NormalMotors="+std::to_string(regionA->getNNormMotors())+" ,FastMotors="+std::to_string(regionA->getNFastMotors())+" ,FrozenMotors="+std::to_string(regionA->getNFrozenMotors()),0,1);
+		pGUI->PrintMessage("Region B: NormalO= "+std::to_string(regionB->getNNOrders())+" ,VIPO="+std::to_string(regionB->getNVipOrder())+" ,FrozenO="+std::to_string(regionB->getNFOrders())+"  - NormalMotors="+std::to_string(regionB->getNNormMotors())+" ,FastMotors="+std::to_string(regionB->getNFastMotors())+" ,FrozenMotors="+std::to_string(regionB->getNFrozenMotors()),0,2);
+		pGUI->PrintMessage("Region C: NormalO= "+std::to_string(regionC->getNNOrders())+" ,VIPO="+std::to_string(regionC->getNVipOrder())+" ,FrozenO="+std::to_string(regionC->getNFOrders())+"  - NormalMotors="+std::to_string(regionC->getNNormMotors())+" ,FastMotors="+std::to_string(regionC->getNFastMotors())+" ,FrozenMotors="+std::to_string(regionC->getNFrozenMotors()),0,3);
+		pGUI->PrintMessage("Region D: NormalO= "+std::to_string(regionD->getNNOrders())+" ,VIPO="+std::to_string(regionD->getNVipOrder())+" ,FrozenO="+std::to_string(regionD->getNFOrders())+"  - NormalMotors="+std::to_string(regionD->getNNormMotors())+" ,FastMotors="+std::to_string(regionD->getNFastMotors())+" ,FrozenMotors="+std::to_string(regionD->getNFrozenMotors()),0,4);
+		if (nc&&np)
+		{
+			pGUI->PrintMessage("This ordered can't be cancelled!", 0, 5);
+			notdele = 0;
 
+			pGUI->PrintMessage("This ordered can't be promoted!", 0,6);
+			notpromot = 0;
+
+		}
+       else if (nc)
+		{
+			pGUI->PrintMessage("This ordered can't be cancelled!", 0, 5);
+			notdele = 0;
+		}
+		else if (np)
+		{
+			pGUI->PrintMessage("This ordered can't be promoted!", 0, 5);
+			notpromot = 0;
+
+		}
 }
 
-
-GUI* Restaurant::getpGUI() 
-{
-	return pGUI;
-}
-
-
+/////////////////////////////
 Region* Restaurant::getRegion(REGION R)
 {
 	switch (R)
@@ -338,24 +483,29 @@ Region* Restaurant::getRegion(REGION R)
 	case B_REG:return this->regionB;
 	case C_REG:return this->regionC;
 	case D_REG:return this->regionD;
-		//this case is impossible
+	//this case is impossible but to avoid warnings
 	default:return this->regionA;
 	}
 
 }
 
+////////////////////////////
 void Restaurant::setTimeOrdPr(int n)
 {
 	TimeOrdProm = (n>0) ? n : 0;
 }
 
+////////////////////////////
 int Restaurant::getTimeOrdPr()
 {
 	return TimeOrdProm;
 }
 
+///////////////////////////// 
 void Restaurant::setNormalorder(Order* Inorder)
 {
+	MainOrders.insert(Inorder);
+	numOfOrders++;
 	REGION type = Inorder->GetRegion();
 	switch (type)
 	{
@@ -376,10 +526,11 @@ void Restaurant::setNormalorder(Order* Inorder)
 	}
 }
 
-
-
+//////////////////////////////
 void Restaurant::setfrozenorder(Order* Inorder)
 {
+	MainOrders.insert(Inorder);
+	numOfOrders++;
 	REGION type = Inorder->GetRegion();
 	switch (type)
 	{
@@ -400,8 +551,11 @@ void Restaurant::setfrozenorder(Order* Inorder)
 	}
 }
 
+///////////////////////////////
 void Restaurant::setviporder(Order *Inorder)
 {
+	MainOrders.insert(Inorder);
+	numOfOrders++;
 	REGION type = Inorder->GetRegion();
 	switch (type)
 	{
@@ -422,234 +576,83 @@ void Restaurant::setviporder(Order *Inorder)
 	}
 }
 
-void Restaurant :: stepByStepMode(){	
-	Order* pOrd;
-	Event* pEv;
-	//srand(time(NULL));
-	pGUI->PrintMessage("Step by step mode. ");
-	pGUI->UpdateInterface();	
-	int EvTime = 0;
-	int CurrentTimeStep = 1;
-	//as long as events queue is not empty yet
-	while(!EventsQueue.isEmpty())
-	{
-		//print current timestep
-		char timestep[10];
-		itoa(CurrentTimeStep,timestep,10);	
-	//	pGUI->ClearStatusBar();
-		pGUI->PrintMessage(timestep);
-		ExecuteEvents(CurrentTimeStep);	//execute all events at current time step
-		//The above line may add new orders to the DEMO_Queue
-		//Let's draw all arrived orders by passing them to the GUI to draw
-	
-		while (DEMO_Queue.dequeue(pOrd))
-		{
-			pGUI->AddOrderForDrawing(pOrd);
-			pGUI->UpdateInterface(); 
-
-	//	pGUI->PrintMessage("Region A: Active Orders= "+std::to_string(regionA->getNNOrders()+regionA->getNFOrders()+regionA->getNVipOrder()));
-
-		}
-	
-		//wiat for mouse click 
-		
-
-		CurrentTimeStep++;	//advance timestep.
-	    pGUI->waitForClick();
-	    assignall();
-		pGUI->UpdateInterface();
-		pGUI->waitForClick();
-	}
-	
-}
-
+//////////////////////////
 void Restaurant::assignall()
 {
 	Order*deleted;
-
+	//Region A
 	deleted=regionA->assignNormal();
-	if (MainOrders.remove(deleted))
-	{
-		pGUI->deleteorder(deleted);
-		pGUI->UpdateInterface();
-		delete deleted;
-	}
-	deleted=regionA->assignFrozen();
-	if (MainOrders.remove(deleted))
-	{
-		pGUI->deleteorder(deleted);
-		pGUI->UpdateInterface();
-		delete deleted;
-	}
-
+   if(	MainOrders.remove(deleted))
+	   numOfOrders--;
 	
-
+	deleted=regionA->assignFrozen();
+	  if(	MainOrders.remove(deleted))
+	   numOfOrders--;
 
 	deleted=regionA->assignVIP();
-	if (MainOrders.remove(deleted))
-	{
-		pGUI->deleteorder(deleted);
-		pGUI->UpdateInterface();
-		delete deleted;
-	}
+	  if(	MainOrders.remove(deleted))
+	   numOfOrders--;
 
-		
-
-
-	/////////
+	/////////Region B
 	deleted=regionB->assignNormal();
-	if (MainOrders.remove(deleted))
-	{
-		pGUI->deleteorder(deleted);
-		pGUI->UpdateInterface();
-		delete deleted;
-	}
-
+	  if(	MainOrders.remove(deleted))
+	   numOfOrders--;
 
 	deleted=regionB->assignFrozen();
-	if (MainOrders.remove(deleted))
-	{
-		pGUI->deleteorder(deleted);
-		pGUI->UpdateInterface();
-		delete deleted;
-	}
-
+	  if(	MainOrders.remove(deleted))
+	   numOfOrders--;
 
 	deleted=regionB->assignVIP();
-	if (MainOrders.remove(deleted))
-	{
-		pGUI->deleteorder(deleted);
-		pGUI->UpdateInterface();
-		delete deleted;
-	}
+    if(	MainOrders.remove(deleted))
+	   numOfOrders--;
 
-
-	///////////
+	///////////Region C
 	deleted=regionC->assignNormal();
-	if (MainOrders.remove(deleted))
-	{
-		pGUI->deleteorder(deleted);
-		pGUI->UpdateInterface();
-		delete deleted;
-	}
+  if(	MainOrders.remove(deleted))
+	   numOfOrders--;
 
 	deleted=regionC->assignFrozen();
-	if (MainOrders.remove(deleted))
-	{
-		pGUI->deleteorder(deleted);
-		pGUI->UpdateInterface();
-		delete deleted;
-	}
-
+	  if(	MainOrders.remove(deleted))
+	   numOfOrders--;
 
 	deleted=regionC->assignVIP();
-	if (MainOrders.remove(deleted))
-	{
-		pGUI->deleteorder(deleted);
-		pGUI->UpdateInterface();
-		delete deleted;
-	}
-	/////////
-	deleted=regionD->assignNormal();
-	if (MainOrders.remove(deleted))
-	{
-		pGUI->deleteorder(deleted);
-		pGUI->UpdateInterface();
-		delete deleted;
-	}
+	  if(	MainOrders.remove(deleted))
+	   numOfOrders--;
 
+	/////////Region D
+	deleted=regionD->assignNormal();
+	  if(	MainOrders.remove(deleted))
+	   numOfOrders--;
 
 	deleted=regionD->assignFrozen();
-	if (MainOrders.remove(deleted))
-	{
-		pGUI->deleteorder(deleted);
-		pGUI->UpdateInterface();
-		delete deleted;
-	}
-
-
-	deleted=regionD->assignVIP();
-	if (MainOrders.remove(deleted))
-	{
-		pGUI->deleteorder(deleted);
-		pGUI->UpdateInterface();
-		delete deleted;
-	}
-
-}
-
-
-void Restaurant ::Read(){
-	ArrivalEvent* ev;
-	CancellationEvent* ec;
-	PromotionEvent* ep;
-	ORD_TYPE ord;
-	REGION reg;
-	int time, id, dest, mon, extrMon;
-	int sn, sf, sv, n, f, v, timeProm, numEvent;
-	char typeEve, typeorder, typeReg;
-	getpGUI()->PrintMessage("enter file name please ");
-	string s = getpGUI()->GetString();
-	ifstream myfile(s + ".txt");
+	  if(	MainOrders.remove(deleted))
+	   numOfOrders--;
 	
-	if (myfile.is_open())
-	{
-		myfile >> sn >> sf >> sv;
-		myfile >> n >> f >> v;
-		getRegion(A_REG)->setmotorsinfo(sn, sf, sv, n, f, v);
-
-		myfile >> n >> f >> v;
-		getRegion(B_REG)->setmotorsinfo(sn, sf, sv, n, f, v);
-
-		myfile >> n >> f >> v;
-		getRegion(C_REG)->setmotorsinfo(sn, sf, sv, n, f, v);
-
-		myfile >> n >> f >> v;
-		getRegion(D_REG)->setmotorsinfo(sn, sf, sv, n, f, v);
-
-		myfile >> timeProm >> numEvent;////////
-		setTimeOrdPr(timeProm);
-		for (int i = 0; i<numEvent; i++)//
-		{
-			myfile >> typeEve;
-			if (typeEve == 'R')
-			{
-				myfile >> time >> typeorder >> id >> dest >> mon >> typeReg;
-				ord = ChangeTypeOrd(typeorder);
-				reg = ChangeTypeReg(typeReg);
-				ev = new ArrivalEvent(time, ord, id, dest, mon, reg);
-				AddEvent(ev);
-			}
-			else if (typeEve == 'X')
-			{
-				myfile >> time >> id;
-				ec = new CancellationEvent(time, id);
-				AddEvent(ec);
-			}
-			else if (typeEve == 'P')
-			{
-				myfile >> time >> id >> extrMon;
-				ep = new PromotionEvent(time, id, extrMon);
-				AddEvent(ep);
-
-			}
-		}
-		myfile.close();
-	}
-	else {
-		getpGUI()->PrintMessage("File cannot be opened");
-	}
+	deleted=regionD->assignVIP();
+	  if(	MainOrders.remove(deleted))
+	   numOfOrders--;
+		
+	PrepareDrawingOrders();
 }
 
+////////////////////////////////////
 ORD_TYPE Restaurant::ChangeTypeOrd(char n){
-	if (n == 'N') { return TYPE_NRM; }
+	if (n == 'N')      { return TYPE_NRM; }
 	else if (n == 'V') { return TYPE_VIP; }
-	else if (n=='F') { return TYPE_FROZ; }
+	else   { return TYPE_FROZ; }
 }
 
+////////////////////////////
 REGION Restaurant:: ChangeTypeReg(char n){
-	if (n == 'A') { return A_REG; }
+	if      (n == 'A') { return A_REG; }
 	else if (n == 'B') { return B_REG; }
 	else if (n == 'C') { return C_REG; }
-	else if (n=='D') { return D_REG; }
+	else   { return D_REG; }
+	
 }
+
+////////////////////////////
+void Restaurant::invalid()
+{
+	pGUI->PrintMessage("you Enter invalid data this order can not save!. ", 0, 5);
+} 

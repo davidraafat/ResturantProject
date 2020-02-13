@@ -8,12 +8,14 @@ private :
 	
 	PriorityNode<T>* backPtr;
 	PriorityNode<T>* frontPtr;
+	int count;
 public :
 	ProQueue();	
 	bool isEmpty() const ;
-	bool enqueue(const T& newEntry,float p);
+	bool enqueue(const T& newEntry,double p);
 	bool dequeue(T& frntEntry);  
-	bool peekFront(T& frntEntry)  const;	
+	bool peekFront(T& frntEntry)  const;
+	const T* toArray() const ; 
 	~ProQueue();
 
 };
@@ -25,7 +27,7 @@ ProQueue<T>::ProQueue()
 {
 	backPtr=nullptr;
 	frontPtr=nullptr;
-
+	count=0;
 }
 
 //////////////////////////
@@ -40,7 +42,7 @@ bool ProQueue<T>::isEmpty() const
 }
 //////////////////////////
 template <typename T>
-bool ProQueue<T>::enqueue(const T& newEntry,float p)
+bool ProQueue<T>::enqueue(const T& newEntry,double p)
 {   
 	PriorityNode<T>*newnode=new PriorityNode<T>;
 	if(newnode==NULL) return false;
@@ -59,12 +61,14 @@ bool ProQueue<T>::enqueue(const T& newEntry,float p)
 				  {
 					newnode->setNext(ptr->getNext());
 					ptr->setNext(newnode);
+					count++;
 					return true;
 				  }
 			  else
 				  {
 					  newnode->setNext(ptr);
 					  frontPtr=newnode;
+					  count++;
 					  return true;
 				  }
 		  }
@@ -72,6 +76,7 @@ bool ProQueue<T>::enqueue(const T& newEntry,float p)
 	  {   
 		newnode->setNext(ptr->getNext());
 		ptr->setNext(newnode);
+		count++;
 		return true;
 	  }
 	}
@@ -83,19 +88,22 @@ bool ProQueue<T>::enqueue(const T& newEntry,float p)
 		frontPtr=newnode;
 		backPtr=newnode;
 		backPtr->setNext(NULL);
+		count++;
 		return true;
 	}
 }
 //////////////////////////
 template <typename T>
-bool ProQueue<T>:: dequeue(T& frntEntry)  
+bool ProQueue<T>:: dequeue(T & frntEntry)  
 {
 	if(isEmpty())
 		return false;
 
 	PriorityNode<T>* nodeToDeletePtr = frontPtr;
+
 	frntEntry = frontPtr->getItem();
 	frontPtr = frontPtr->getNext();
+
 	// Queue is not empty; remove front
 	if (nodeToDeletePtr == backPtr)	 // Special case: one node in queue
 		backPtr = nullptr ;	
@@ -103,7 +111,7 @@ bool ProQueue<T>:: dequeue(T& frntEntry)
 	// Free memory reserved by the dequeued node
 	delete nodeToDeletePtr;
 
-
+	count--;
 	return true;
 
 }
@@ -118,9 +126,29 @@ bool ProQueue<T>:: peekFront(T& frntEntry) const
 	return true;
 
 }
+//////////////////////////////
+template <typename T>
+const T * ProQueue<T>::toArray() const
+{
+	T * Contents= new T [count];
+	PriorityNode<T>* curPtr = frontPtr;
+	int counter = 0;
+	while (curPtr != nullptr&& (counter < count))
+	{
+		
+		Contents[counter] = curPtr->getItem();
+		curPtr = curPtr->getNext();
+		counter++;
+	} // end while
+	return Contents;
+} // end toArray
 /////////////////////////////
 template <typename T>
 ProQueue<T>::~ProQueue()
 {
+	while(!isEmpty())
+	{
+		T item;
+		dequeue(item);
+	}
 }
-

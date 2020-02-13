@@ -3,7 +3,6 @@
 
 #include "..\CMUgraphicsLib\CMUgraphics.h"
 #include "..\Defs.h"
-
 #include "..\Rest\Order.h"
 #include "..\Generic_DS\List.h"
 #include "..\Generic_DS\Node.h"
@@ -65,11 +64,8 @@ private:
 	// to point to the current waiting orders only
 	
    
-	List<Order*> OrdList;
-	int VIPcount;
-	int Frozencount;
-	int Normalcount;
-	int numofLines;
+	int OrderCount;		//the total number of orders to be drawn
+	Order * OrdListForDrawing[MaxPossibleOrdCnt]; // This Array of Pointers is used for drawing elements in the GUI
 
 
 	// 
@@ -83,7 +79,7 @@ private:
 
 	void DrawString(const int iX, const int iY, const string Text); // prints a message in the passed coordinates
 	void DrawRestArea() const;	    // draws the restaurant area
-
+	void ClearStatusBar() const;    // clears the status bar
 	void ClearDrawingArea() const;	// clears the Drawing area from all drawings
 
 public:
@@ -95,13 +91,10 @@ public:
 	string GetString() const ; // reads a string (keyboard input) from the user
 
 	// Output Functions  ---------------------------
-	void PrintMessage(string msg) const; // prints a message in the status bar
-	void AddLine();
-	void ClearStatusBar() const;    // clears the status bar
+	void PrintMessage(string msg,bool clear,int i=0) const; // prints a message in the status bar
 	void UpdateInterface();
-	void AddOrderForDrawing(Order* pOrd);	//Adds a new order to the drawing list
+	void AddOrderForDrawing( Order* pOrd);	//Adds a new order to the drawing list
 	void ResetDrawingList();		//resets drawing list (should be called every timestep after drawing)
-	void deleteorder(Order *);
 	PROG_MODE getGUIMode() const;			//returns the mode of the program
 
 };

@@ -269,5 +269,10 @@
     <Text Include="CMUgraphicsLib\Readme.txt">
       <Filter>CMUGraphicsLib</Filter>
     </Text>
+    <Text Include="Text1.txt" />
+    <Text Include="Text2.txt" />
+    <Text Include="Text.txt" />
+    <Text Include="Text3.txt" />
+    <Text Include="Text4.txt" />
   </ItemGroup>
 </Project>

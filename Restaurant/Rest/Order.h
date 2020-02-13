@@ -7,24 +7,24 @@ class Order
 {
 
 protected:
-	int ID;             //Each order has a unique ID (from 1 --> 999 )
-	ORD_TYPE type;		//order type: Normal, Frozen, VIP
-	REGION Region;      //Region of this order
-	int Distance;     	//The distance (in meters) between the order location and the resturant 
-	double totalMoney;	//Total order money
-	double priority;     //Priority of this order 
-	int ArrTime, ServTime, FinishTime;	//arrival, service start, and finish times
+	int ID;                                     //Each order has a unique ID (from 1 --> 999 )
+	ORD_TYPE type;		                        //order type: Normal, Frozen, VIP
+	REGION Region;                              //Region of this order
+	int Distance;     	                        //The distance (in meters) between the order location and the resturant 
+	double totalMoney;                      	//Total order money
+	
 	
 	
 	//
 	// TODO: Add More Data Members As Needed
 	//
-	            
+	double priority;                            //Priority of this order 
+	int ArrTime, ServTime, FinishTime;	        //arrival, service start, and finish times           
     
 public:
 	Order () ;
 	Order(int ID, ORD_TYPE r_Type, REGION r_region,int Distance, double totalMoney,int ArrTime);
-	virtual ~Order();
+
 
 	int GetID();
 	void setType(ORD_TYPE);
@@ -33,7 +33,7 @@ public:
 
 	void SetDistance(int d);
 	int GetDistance() const;
-
+    virtual ~Order();  
 	//
 	// TODO: Add More Member Functions As Needed
 	//
@@ -45,7 +45,6 @@ public:
 	int getServTime();
 	int getFinishTime();
 	double getPriority();
-
 	bool operator==(Order compared);
 
 };

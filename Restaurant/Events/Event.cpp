@@ -12,6 +12,7 @@ int Event::getEventTime()
 {
 	return EventTime;
 }
+
 int Event::getOrderID()
 {
 	return OrderID;

@@ -1156,6 +1156,7 @@ void window::DrawString(const int iX, const int iY, const string strText) {
 
     DrawString(iX, iY, (char *)strText.c_str());
 
+
 }
 
 void window::DrawInteger(const int iX, const int iY, const long lNumber) {

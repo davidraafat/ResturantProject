@@ -67,5 +67,6 @@ bool Motorcycle::compare(int TimeStep)
 
 Motorcycle::~Motorcycle()
 {
+
 }
 

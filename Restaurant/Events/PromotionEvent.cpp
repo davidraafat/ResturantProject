@@ -15,11 +15,10 @@ double PromotionEvent::getExtraMoney()
 
 void PromotionEvent::Execute(Restaurant *pRest)
 {
+
 //Update after editing restaurant>>promote function
 	
-   pRest->PromoteOrder(OrderID, extraMoney);
-
-
+   pRest->PromoteOrder(OrderID, extraMoney, EventTime);
 }
 
 PromotionEvent::~PromotionEvent(void)

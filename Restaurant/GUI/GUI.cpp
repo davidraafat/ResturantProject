@@ -6,12 +6,8 @@ GUI::GUI()
 	pWind = new window(WindWidth+15,WindHeight,0,0); 
 	pWind->ChangeTitle("The Restautant");
 
-	/*OrderCount = 0;*/
-	VIPcount=0;
-	Frozencount=0;
-	Normalcount=0;
-	numofLines=1;
-
+	OrderCount=0;
+	
 	//Set color for each order type
 	OrdersClrs[TYPE_NRM] = 	DARKBLUE;	//normal-order color
 	OrdersClrs[TYPE_FROZ] = VIOLET;		//Frozen-order color
@@ -54,29 +50,30 @@ string GUI::GetString() const
 		else
 			Label += Key;
 		
-		PrintMessage(Label);
+		PrintMessage(Label,1);
 	}
 }
-
 //////////////////////////////////////////////////////////////////////////////////////////
 // ================================== OUTPUT FUNCTIONS ===================================
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void GUI::PrintMessage(string msg) const	//Prints a message on status bar
+void GUI::PrintMessage(string msg,bool clear,int i ) const	//Prints  message on status bar
 {
-   
-	ClearStatusBar();
+	if (clear) ClearStatusBar();
+
 	pWind->SetPen(DARKRED);
 	pWind->SetFont(18, BOLD , BY_NAME, "Arial");   
-	pWind->DrawString(10, WindHeight - (int) (StatusBarHeight/1.5), msg); // You may need to change these coordinates later 
-	                                                                      // to be able to write multi-line
+    pWind->DrawString(10, WindHeight - (int) ((StatusBarHeight-25*i)/1.5)-40, msg);
+	
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 void GUI::DrawString(const int iX, const int iY, const string Text)
 {
+	
 	pWind->SetPen(DARKRED);
 	pWind->SetFont(18, BOLD , BY_NAME, "Arial");   
 	pWind->DrawString(iX, iY, Text);
+	
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -192,11 +189,6 @@ void GUI::DrawSingleOrder(Order* pO, int RegionCount)     // It is a private fun
 	pWind->SetFont(20,BOLD, MODERN);
 	pWind->DrawInteger(x,y,pO->GetID());
 }
-///////////////////////////////////
-void GUI::AddLine()
-{
-	numofLines++;
-}
 
 //////////////////////////////////////////////////////////////////////////////////////////
 /* A function to draw a list of orders and ensure there is no overflow in the drawing*/
@@ -209,14 +201,12 @@ void GUI::DrawOrders()
 
 	//Prepare counter for each region
 	int RegionsCounts[REG_CNT]={0};	//initlaize all counters to zero
-	Node<Order*>*ToDraw=OrdList.getHead();
-	
-	while (ToDraw)
+
+	for(int i=0; i<OrderCount; i++)
 	{
-	REGION orderRegion = ToDraw->getItem()->GetRegion();
-	RegionsCounts[orderRegion]++;
-	DrawSingleOrder(ToDraw->getItem(), RegionsCounts[orderRegion]);
-	ToDraw=ToDraw->getNext();
+		int orderRegion = OrdListForDrawing[i]->GetRegion();
+		RegionsCounts[orderRegion]++;
+		DrawSingleOrder(OrdListForDrawing[i], RegionsCounts[orderRegion]);
 	}
 	
 }
@@ -226,79 +216,34 @@ void GUI::UpdateInterface()
 	ClearDrawingArea();
 	DrawRestArea();
 	DrawOrders();
+
 }
 
 /*
 	AddOrderForDrawing: Adds a new order to the drawing list
 */
-void GUI::AddOrderForDrawing(Order* ptr)
+void GUI::AddOrderForDrawing( Order* ptr)
 {
-	ORD_TYPE type=ptr->GetType();
-	if(type==TYPE_VIP)
-	{
-		Node<Order*>* cur=OrdList.getHead();
-		int VIPpos=1,i=0;
-		while(cur && i<=VIPcount)
-		{
-			if(cur->getItem()->getPriority()>=ptr->getPriority())
-			{
-			i++;
-			VIPpos++;
-			}
-			cur = cur->getNext();
-		}
-		OrdList.insertpos(VIPpos,ptr);
-		VIPcount++;
-	}
-	
-	else if(type==TYPE_FROZ)
-	{
-		OrdList.insertpos(VIPcount+Frozencount+1,ptr);
-		Frozencount++;
-	}
-	else if(type==TYPE_NRM)
-	{
-		OrdList.insertpos(VIPcount+Frozencount+Normalcount+1,ptr);
-		Normalcount++;
-	}
-	
+	if (OrderCount < MaxPossibleOrdCnt) 
+		OrdListForDrawing[OrderCount++] = ptr;
 
 	// Note that this function doesn't allocate any Order objects
 	// It only makes the first free pointer in the array
 	// points to the same Order pointed to by "ptr"
+
 }
 
 void GUI::ResetDrawingList()
 {
-		//resets the orders count to be ready for next timestep updates
+		OrderCount = 0;	//resets the orders count to be ready for next timestep updates
 }
-
-void GUI::deleteorder(Order *deleteord)
-{
-	ORD_TYPE type = deleteord->GetType();
-	switch (type)
-	{
-	case TYPE_NRM:
-		 Normalcount--;
-		break;
-	case TYPE_FROZ:
-		Frozencount--;
-
-		break;
-	case TYPE_VIP:
-		VIPcount--;
-		break;
-	}
-	OrdList.remove(deleteord);
-}
-
 
 PROG_MODE	GUI::getGUIMode() const
 {
 	PROG_MODE Mode;
 	do
 	{
-		PrintMessage("Please select GUI mode: (1)Interactive, (2)StepByStep, (3)Silent, (4)DEMO... ");
+		PrintMessage("Please select GUI mode: (1)Interactive, (2)StepByStep, (3)Silent",1);
 		string S = GetString();
 		Mode = (PROG_MODE) (atoi(S.c_str())-1);
 	}

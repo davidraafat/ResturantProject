@@ -8,21 +8,20 @@ class List
 {
 	Node<T>* head;    //Pointer to the first element in the list
 	Node<T>* tail;    //Pointer to the last element in the list
-	//Node<T>* getpointerto(T item);  //utility function to get pointer to specific data
+	int count;        //it will be used @ to array function
 
 public:
-	List(void);
-//	List(const List<T> & list );
-	bool isEmpty();    
-	bool insert(T newEntry);
-	bool insertpos(int newPosition,const T& newEntry);
-	bool remove(T & xItem);
-	T getentry(int id);
-	bool removehead(T &temp);          //To remove the first element
-	void clear();
-	Node<T>* getNodeAt(int );
-	Node<T>* getHead();
-	~List(void);
+	List(void);                                              //Constructor 
+	List(const List<T> & list );                             //Copy Constructor  
+	bool isEmpty();                                          //check if the list is empty
+	bool insert(T newEntry);                                 //Insetat the end of the list
+	bool insertpos(int newPosition,const T& newEntry);       //insert in specific Position
+	bool remove(T & xItem);             //To remove specific element
+	bool removehead(T &temp);           //To remove the first element
+	void clear();                       // Clear the list & delete all elements in it
+	Node<T>* getNodeAt(int );           //Get pointer to item in specific position
+	const T * toArray() const ;
+	~List(void);                        //Distructor   
 };
 ///////////////////////////
 
@@ -31,36 +30,37 @@ List<T>::List()
 {
 head=NULL;
 tail=NULL;
+count=0;
 }
 ///////////////////////////
-//template<typename T>
-//List<T>::List(const List<T> & list )
-//{
-//	Node *tmp=list.head,*tail=NULL;
-//	while(tmp)
-//	{
-//		if(tmp==list.head)
-//		{
-//			Node* added=new Node(tmp->getItem());
-//			head=added;
-//			tail=head;
-//			tmp=tmp->getNext();
-//		}
-//		else
-//		{
-//			Node* added=new Node(tmp->getItem());
-//			tail->setNext(added);
-//			tail=added;
-//			tmp=tmp->getNext();
-//			
-//		}
-//		
-//	}
-//
-//}
+template<typename T>
+List<T>::List(const List<T> & list )
+{
+	Node *tmp=list.head,*tail=NULL;
+	count=list.count;
+	while(tmp)
+	{
+		if(tmp==list.head)
+		{
+			Node* added=new Node(tmp->getItem());
+			head=added;
+			tail=head;
+			tmp=tmp->getNext();
+		}
+		else
+		{
+			Node* added=new Node(tmp->getItem());
+			tail->setNext(added);
+			tail=added;
+			tmp=tmp->getNext();
+			
+		}
+		
+	}
+
+}
 
 ///////////////////////////
-
 //check if the list is empty
 template <typename T>
 bool List<T>::isEmpty()
@@ -70,53 +70,40 @@ if (head==NULL)
 return false;
 }
 
-///////////////////////////
-//template <typename T>
-//Node<T>* List<T>::getpointerto(T item)
-//{
-//	Node<T>*ptr=new Node;
-//	ptr=head;
-//while (ptr)
-//{
-//if(ptr->getItem()==item)
-//	return ptr;
-//else 
-//	ptr=ptr->getNext();
-//}
-//return ptr->getNext();
-//}
-///////////////////////////
+/////////////////////////
 template <typename T>
 bool List<T>::insert(T newEntry)
 {
 	if(head==NULL)
 		{
 		Node<T>*nNode=new Node<T>;
-		/*if(nNode==NULL)  return false;
+		if(nNode==NULL)  return false;
 
 		else
-			{ */
+			{ 
 				nNode->setNext(NULL);
 				nNode->setItem(newEntry);
 				head=nNode;
 				tail=nNode;
+				count++;
 				return true;
-			//}
+			}
 	
 		}
 	else 
 		{
 		Node<T>*nNode=new Node<T>;
-			/*if(nNode==NULL)
+			if(nNode==NULL)
 				return false;
 			else
-				{*/
+				{
 					nNode->setItem(newEntry);
 					tail->setNext(nNode);
 					tail=nNode;
 					tail->setNext(NULL);
+					count++;
 					return true;
-				//}
+				}
 	
 		}
 }
@@ -125,28 +112,30 @@ bool List<T>::insert(T newEntry)
 template <typename T>
 bool List<T>::insertpos( int newPosition,const T & newEntry)
 {
-bool ableToInsert = (newPosition >= 1);
-if (ableToInsert)
-{
-// Create a new node containing the new entry
-Node<T>* newNodePtr = new Node<T>(newEntry);
-// Attach new node to chain
-if (newPosition == 1)
-{
-// Insert new node at beginning of chain
-newNodePtr->setNext(head);
-head = newNodePtr;
-}
-else
-{
-// Find node that will be before new node
-Node<T>* prevPtr = getNodeAt(newPosition - 1);
-// Insert new node after node to which prevPtr points
-newNodePtr->setNext(prevPtr->getNext());
-prevPtr->setNext(newNodePtr);
-} // end if
+	bool ableToInsert = (newPosition >= 1);
+	if (ableToInsert)
+	{
+	// Create a new node containing the new entry
+	Node<T>* newNodePtr = new Node<T>(newEntry);
+	// Attach new node to chain
+		if (newPosition == 1)
+			{
+			// Insert new node at beginning of chain
+			newNodePtr->setNext(head);
+			head = newNodePtr;
+			count++;
+			}
+		else
+			{
+			// Find node that will be before new node
+			Node<T>* prevPtr = getNodeAt(newPosition - 1);
+			// Insert new node after node to which prevPtr points
+			newNodePtr->setNext(prevPtr->getNext());
+			prevPtr->setNext(newNodePtr);
+			count++;
+			} // end if
 
-} // end if
+	} // end if
 return ableToInsert;
 } // end insert
 
@@ -163,27 +152,12 @@ Node<T>* List<T>::getNodeAt(int pos)
 		}
 		return nptr;
 	}
-	else { return NULL; }
-}
-///////////////////////////////
-template <typename T>
-
-T List<T>::getentry(int id)
-{
-	if ((pos >= 1))
+	else
 	{
-		Node<T>* nptr = getNodeAt(pos);
-		return nptr->getItem();
+		return NULL;
 	}
-	else { cout << "entry not found"; }
 }
-///////////////////////////
-template <typename T>
 
-Node<T>* List<T>::getHead()
-{
-	return head;
-}
 ////////////////////////
 template <typename T>
 bool List<T>::remove(T & xItem)
@@ -197,6 +171,7 @@ bool List<T>::remove(T & xItem)
 		{
 			head=head->getNext();
 			delete next;
+			count--;
 			return true;
 		}
 	else if(next->getItem()==xItem)
@@ -207,6 +182,7 @@ bool List<T>::remove(T & xItem)
 		}
 		prev->setNext(next->getNext());
 		delete next;
+		count--;
 		return true;
 		}
 	else
@@ -236,7 +212,7 @@ void List<T>::clear()
 		delete head;
 		head = P;
 	}
-
+	count=0;
 }
 
 ///////////////////////////
@@ -244,25 +220,42 @@ template <typename T>
 bool List<T>::removehead(T &temp)
 {
 	if (head==NULL) return false;
+
 	if(head==tail)
 	{
 		temp = head->getItem();
 		delete head;
        	head=tail=nullptr;
+		count--;
 		return true;
 	}
 	else
 	{
-	Node<T>*next=head;
+      	Node<T>*next=head;
 	    temp=next->getItem();
 		head=head->getNext();
 		
 		delete next;
+		count--;
 		return true;
 	}
 
 }
-
+///////////////////////////
+template < typename T>
+const T * List<T>::toArray() const
+{
+	T * Contents= new T [count];
+	Node<T>* curPtr = head;
+	int counter = 0;
+	while (curPtr != nullptr&& (counter < count))
+	{
+		Contents[counter] = curPtr->getItem();
+		curPtr = curPtr->getNext();
+		counter++;
+	} // end while
+	return Contents;
+} // end toArray
 ///////////////////////////
 template <typename T>
 List<T>::~List()

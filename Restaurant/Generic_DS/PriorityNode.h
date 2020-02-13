@@ -5,14 +5,14 @@ class PriorityNode
 private:
 	T item; // A data item
 	PriorityNode<T>* next; // Pointer to next node
-	float priority;
+	double priority;        // Priority to sort Nodes in Priority Queue 
 
 public:
 	PriorityNode();
 	PriorityNode( const T & r_Item);	//passing by const ref.
 	PriorityNode( const T & r_Item, PriorityNode<T>* nextNodePtr);
-	void setpriority(float pro);
-    float getpriority();
+	void setpriority(double pro);
+    double getpriority();
 	void setItem( const T & r_Item);
 	void setNext(PriorityNode<T>* nextNodePtr);
 	PriorityNode<T>* getNext() const;
@@ -69,7 +69,7 @@ PriorityNode<T>* PriorityNode<T>::getNext() const
 }
 ///////////////////
 template <typename T>
-void PriorityNode<T>::setpriority(float pro)
+void PriorityNode<T>::setpriority(double pro)
 {
 if(pro>0)
 	priority=pro;
@@ -78,7 +78,7 @@ else
 }
 ////////////////////
 template <typename T>
-float PriorityNode<T>::getpriority()
+double PriorityNode<T>::getpriority()
 {
 	return priority;
 }
